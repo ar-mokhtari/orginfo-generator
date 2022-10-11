@@ -1,8 +1,8 @@
 package adddomain
 
 import (
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/config/env"
 	"os"
 	temp "text/template"
 )

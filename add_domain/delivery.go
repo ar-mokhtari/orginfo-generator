@@ -2,8 +2,8 @@ package adddomain
 
 import (
 	"bytes"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/config/env"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -44,7 +44,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 		return readErr
 	}
 	contentText := env.Delivery + domain.UpperName + ".Routs(echo)"
-	contentImport := "import (\n\t" + env.Delivery + domain.UpperName + ` "` + "github.com/ar-mokhtari/orginfo/delivery/http/V1/" + domain.SnakeName + `"`
+	contentImport := "import (\n\t" + env.Delivery + domain.UpperName + ` "` + "github.com/ar-mokhtari/orginfo-generator/delivery/http/V1/" + domain.SnakeName + `"`
 	textExist := strings.Contains(string(input), contentText)
 	if !textExist {
 		output := bytes.Replace(input, []byte("}"), []byte("\t"+contentText+"\n}"), -1)

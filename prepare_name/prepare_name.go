@@ -3,10 +3,10 @@ package preparename
 import (
 	"errors"
 	"fmt"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo/config/env"
-	"github.com/ar-mokhtari/orginfo/pkg/convertor"
-	"github.com/ar-mokhtari/orginfo/pkg/validator"
+	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/pkg/convertor"
+	"github.com/ar-mokhtari/orginfo-generator/pkg/validator"
 	"strings"
 )
 

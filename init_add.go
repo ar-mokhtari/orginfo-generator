@@ -2,10 +2,10 @@ package generator
 
 import (
 	"fmt"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/add_domain"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/delete_domain"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/config/env"
+	adddomain "orginfo-generator/add_domain"
+	deletedomain "orginfo-generator/delete_domain"
 )
 
 func addInit(input entity.Domain) {

@@ -4,9 +4,8 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo/config/cli/generator/prepare_name"
-	"github.com/ar-mokhtari/orginfo/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/config/env"
 	"os"
 	"strings"
 )
