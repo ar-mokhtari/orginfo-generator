@@ -2,7 +2,7 @@ package delivery{{.AllLowName}}
 
 import (
 	"context"
-	dto "github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
+	dto "{{.ProjectName}}/dto/{{.SnakeName}}"
 )
 
 type (

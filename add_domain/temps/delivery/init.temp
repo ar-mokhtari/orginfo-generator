@@ -1,7 +1,7 @@
 package V1
 
 import (
-	delivery{{.UpperName}} "github.com/ar-mokhtari/orginfo-generator/delivery/http/V1/{{.lowerName}}"
+	delivery{{.UpperName}} "{{.ProjectName}}/delivery/http/V1/{{.lowerName}}"
 	"github.com/labstack/echo/v4"
 )
 

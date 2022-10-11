@@ -57,6 +57,7 @@ func (nc *newCommand) Run() (err error) {
 			}
 		}
 		res.Fields = finalFields
+		res.ProjectName = env.MainRepositoryPath
 		addInit(res)
 	case true:
 		allDomain, parseErr := parseDomainFromFile()
@@ -75,6 +76,7 @@ func (nc *newCommand) Run() (err error) {
 				}
 			}
 			res.Fields = domain.Fields
+			res.ProjectName = env.MainRepositoryPath
 			addInit(res)
 		}
 	}

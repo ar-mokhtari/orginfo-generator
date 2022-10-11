@@ -1,8 +1,8 @@
 package delivery{{.AllLowName}}
 
 import (
-	dto "github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
-	usecase{{.UpperName}} "github.com/ar-mokhtari/orginfo-generator/usecase/{{.SnakeName}}"
+	dto "{{.ProjectName}}/dto/{{.SnakeName}}"
+	usecase{{.UpperName}} "{{.ProjectName}}/usecase/{{.SnakeName}}"
 	"github.com/labstack/echo/v4"
 	"net/http"
 	"strconv"

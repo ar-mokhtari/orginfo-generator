@@ -1,8 +1,8 @@
 package delivery{{.AllLowName}}
 
 import (
-	"github.com/ar-mokhtari/orginfo-generator/adapter/storage"
-	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo-generator/entity/{{.SnakeName}}"
+	"{{.ProjectName}}/adapter/storage"
+	entity{{.AllLowName}} "{{.ProjectName}}/entity/{{.SnakeName}}"
 )
 
 type Usecase struct {

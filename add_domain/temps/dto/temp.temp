@@ -1,7 +1,7 @@
 package dto
 
 import (
-    entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo-generator/entity/{{.SnakeName}}"
+    entity{{.AllLowName}} "{{.ProjectName}}/entity/{{.SnakeName}}"
     {{range .Fields}}{{if eq .Type "time.Time"}}"time" {{break}}{{end}}{{end}}
 )
 type (

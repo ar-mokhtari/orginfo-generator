@@ -2,9 +2,9 @@ package delivery{{.AllLowName}}
 
 import (
 	"context"
-	"github.com/ar-mokhtari/orginfo-generator/adapter/storage"
-	"github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
-	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo-generator/usecase/validation/{{.SnakeName}}"
+	"{{.ProjectName}}/adapter/storage"
+	"{{.ProjectName}}/dto/{{.SnakeName}}"
+	validation{{.UpperName}} "{{.ProjectName}}/usecase/validation/{{.SnakeName}}"
 )
 
 func (uc Usecase) Find{{.UpperName}}(ctx context.Context, req dto.Find{{.UpperName}}Request) (dto.Find{{.UpperName}}Response, error) {

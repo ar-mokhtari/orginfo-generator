@@ -2,7 +2,7 @@ package delivery{{.AllLowName}}
 
 import (
 	"context"
-	"github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
+	"{{.ProjectName}}/dto/{{.SnakeName}}"
 )
 
 func (uc Usecase) Get{{.UpperName}}s(ctx context.Context) (dto.Get{{.UpperName}}Response, error) {

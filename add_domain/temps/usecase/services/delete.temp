@@ -2,8 +2,8 @@ package delivery{{.AllLowName}}
 
 import (
 	"context"
-	"github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
-	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo-generator/usecase/validation/{{.SnakeName}}"
+	"{{.ProjectName}}/dto/{{.SnakeName}}"
+	validation{{.UpperName}} "{{.ProjectName}}/usecase/validation/{{.SnakeName}}"
 )
 
 func (uc Usecase) Delete{{.UpperName}}(ctx context.Context, req dto.Delete{{.UpperName}}Request) (dto.Delete{{.UpperName}}Response, error) {

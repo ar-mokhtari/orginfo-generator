@@ -15,6 +15,7 @@ func New() {
 	}
 	spilitedPwd := strings.Split(pwd, "/")
 	mainPathSlice := spilitedPwd[:len(spilitedPwd)-2]
+	env.MainRepositoryPath = strings.Join(spilitedPwd[5:6], "/")
 	env.MainPath = strings.Join(mainPathSlice, "/") + "/"
 	//-------find project path---------
 
