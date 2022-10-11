@@ -3,8 +3,8 @@ package storage
 import (
 	"context"
 	"errors"
-	"github.com/ar-mokhtari/orginfo/adapter/storage/models"
-	"github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
+	"github.com/ar-mokhtari/orginfo-generator/adapter/storage/models"
+	"github.com/ar-mokhtari/orginfo-generator/entity/{{.SnakeName}}"
 	"gorm.io/gorm"
 )
 

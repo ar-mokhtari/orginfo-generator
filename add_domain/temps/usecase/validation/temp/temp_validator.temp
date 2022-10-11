@@ -3,8 +3,8 @@ package delivery{{.AllLowName}}
 import (
 	"context"
 	"fmt"
-	"github.com/ar-mokhtari/orginfo/adapter/storage"
-	dto "github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	"github.com/ar-mokhtari/orginfo-generator/adapter/storage"
+	dto "github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
 )

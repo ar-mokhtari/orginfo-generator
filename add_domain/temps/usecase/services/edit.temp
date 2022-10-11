@@ -2,9 +2,9 @@ package delivery{{.AllLowName}}
 
 import (
 	"context"
-	"github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
-	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
-	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/validation/{{.SnakeName}}"
+	"github.com/ar-mokhtari/orginfo-generator/dto/{{.SnakeName}}"
+	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo-generator/entity/{{.SnakeName}}"
+	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo-generator/usecase/validation/{{.SnakeName}}"
 )
 
 func (uc Usecase) Edit{{.UpperName}}(ctx context.Context, input{{.UpperName}} dto.Edit{{.UpperName}}Request) (dto.Edit{{.UpperName}}Response, error) {

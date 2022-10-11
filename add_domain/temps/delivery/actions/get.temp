@@ -1,7 +1,7 @@
 package delivery{{.AllLowName}}
 
 import (
-	usecase{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/{{.SnakeName}}"
+	usecase{{.UpperName}} "github.com/ar-mokhtari/orginfo-generator/usecase/{{.SnakeName}}"
 	"github.com/labstack/echo/v4"
 	"net/http"
 )
