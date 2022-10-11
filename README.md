@@ -67,7 +67,7 @@ echo "package main
 import \"github.com/ar-mokhtari/orginfo-generator\"
 
 func main() {
-   generator.new()
+   generator.New()
 }
 
 " > project_name/cli/generator/main.go && cat project_name/cli/generator/main.go
