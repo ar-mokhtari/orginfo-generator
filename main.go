@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func new() {
+func New() {
 	//main root
 	pwd, err := os.Getwd()
 	if err != nil {
