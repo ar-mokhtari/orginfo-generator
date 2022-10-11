@@ -1,0 +1,12 @@
+[
+  {
+    "domain_name": "string",
+    "fields": [
+      {
+        "name": "string",
+        "type": "string",
+        "json_name": "string"
+      }
+    ]
+  }
+]
