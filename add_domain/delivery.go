@@ -2,6 +2,7 @@ package adddomain
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
@@ -41,7 +42,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	}
 	//---------------------------
 	//add route init in delivery/http/V1/init.go
-	if _, existErr := os.Stat(deliveryInit); existErr != nil {
+	if _, existErr := os.Stat(deliveryInit); errors.Is(existErr, os.ErrNotExist) {
 		initFile, initCreateErr := os.Create(deliveryInit)
 		if initCreateErr != nil {
 			return initCreateErr

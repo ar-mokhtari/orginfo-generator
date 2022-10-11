@@ -8,13 +8,11 @@ import (
 )
 
 func New() {
-	//main root
+	//-------find project path---------
 	pwd, err := os.Getwd()
 	if err != nil {
 		fmt.Printf("error: %s", err.Error())
 	}
-
-	//-------find project path---------
 	spilitedPwd := strings.Split(pwd, "/")
 	mainPathSlice := spilitedPwd[:len(spilitedPwd)-2]
 	env.MainPath = strings.Join(mainPathSlice, "/") + "/"

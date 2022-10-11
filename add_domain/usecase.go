@@ -1,6 +1,7 @@
 package adddomain
 
 import (
+	"errors"
 	"fmt"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
@@ -39,7 +40,7 @@ func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 		tempFile.Close()
 	}
 	//---------------------------
-	if _, otherValidationErr := os.Stat(env.MainPath + "usecase/validation/others/other_validation.go"); otherValidationErr != nil {
+	if _, otherValidationErr := os.Stat(env.MainPath + "usecase/validation/others/other_validation.go"); errors.Is(otherValidationErr, os.ErrNotExist) {
 		otherValidationFile, createOtherValidationErr := os.Create(env.MainPath + "usecase/validation/others/other_validation.go")
 		if createOtherValidationErr != nil {
 			return createOtherValidationErr

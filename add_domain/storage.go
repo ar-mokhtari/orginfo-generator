@@ -2,6 +2,7 @@ package adddomain
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
@@ -23,7 +24,7 @@ func DomainStorageGenerator(domain entity.Domain) error {
 		1: {"init", "package storage\n\nimport (\n\t\"fmt\"\n)\n\nvar DB DBMS\n\nfunc Init() {\n\tvar eErr error\n\t//I. Define a data source name (DSN)\n\tdsn := \"user:g#Y!298mKwz85@tcp(127.0.0.1:3306)/orginfo?charset=utf8mb4&parseTime=True&loc=Local\"\n\t//II. Try to connect to dsn address\n\tDB, eErr = GormConnect(dsn)\n\t//III. If gorm connect successfully then try to migrate database\n\tif eErr == nil {\n\t\terr := GormAutoMigrate(*DB.gorm)\n\t\tif err != nil {\n\t\t\tfmt.Errorf(\"some error .... %#v\", err)\n\t\t}\n\t}\n}\n"},
 	}
 	for _, part := range storeFiles {
-		if _, existErr := os.Stat(storagePath + part[0] + ".go"); existErr != nil {
+		if _, existErr := os.Stat(storagePath + part[0] + ".go"); errors.Is(existErr, os.ErrNotExist) {
 			setupFile, setupCreateErr := os.Create(storagePath + part[0] + ".go")
 			if setupCreateErr != nil {
 				return setupCreateErr
