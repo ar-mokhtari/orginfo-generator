@@ -2,6 +2,7 @@ package generator
 
 import (
 	"fmt"
+	"github.com/ar-mokhtari/orginfo-generator/delete_domain"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 )
 

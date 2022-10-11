@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
+	preparename "github.com/ar-mokhtari/orginfo-generator/prepare_name"
 	"os"
 	"strings"
 )

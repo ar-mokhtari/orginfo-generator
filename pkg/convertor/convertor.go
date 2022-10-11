@@ -2,7 +2,7 @@ package convertor
 
 import (
 	"errors"
-	"github.com/ar-mokhtari/orginfo/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/env"
 	"github.com/dlclark/regexp2"
 	"reflect"
 	"sync"
