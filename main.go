@@ -4,7 +4,7 @@ import (
 	"os"
 )
 
-func new() {
+func New() {
 	//prepare command(s) with flag(s)
 	flagErr := rootCommand(os.Args[1:])
 	if flagErr != nil {

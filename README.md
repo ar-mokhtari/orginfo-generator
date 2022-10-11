@@ -61,25 +61,31 @@ go get github.com/go-ozzo/ozzo-validation
 to create new domain with CRUD operation and other prerequisite:
 
 ````
-mkdir project_name
-mkdir project_name/cli/generator 
-touch main.go
+mkdir -p project_name/cli/generator &&
+echo "package main
+
+import \"github.com/ar-mokhtari/orginfo-generator\"
+
+func main() {
+   generator.new()
+}
+
+" > project_name/cli/generator/main.go && cat project_name/cli/generator/main.go
+
 ````
 
-import :
-
-[domain generator](cli/generator/main.go)
-and follow command(s) ...
-like run this from '/config/cli/generator/bin/':
 
 ````
- cd go/src/orginfo/config/cli/generator/bin/
+ cd go/src/project_name/cli/generator
+ go get -u github.com/ar-mokhtari/orginfo-generator
+ go build -o bin
 ````
 
 <h5>pattern #1</h5>
 input from command and flag one by one:
 
 ````
+ cd go/src/project_name/cli/generator/bin
 ./generator sub-command -domain_name="DOMAIN NAME" -fields="field1-string-field1_1,field2-uint-field1_2,..."
 ````
 
@@ -129,46 +135,6 @@ Also, to remove a domain run this:
 
 https://user-images.githubusercontent.com/49469395/194825671-d93fe8e4-64fb-4c67-a8fb-c5e29e55e16c.mp4
 
-<h3> Create and set service for production </h3>
-<hr>
-<h4> Create service </h4>
-
-````
-nano /lib/systemd/system/orginfo.service
-````
-
-<h4> Set service </h4>
-
-````
-[Unit]
-Description=orginfo
-
-[Service]
-Type=simple
-Restart=always
-RestartSec=5s
-ExecStart=/home/aliz/go/src/orginfo/bin/orginfo
-
-[Install]
-WantedBy=multi-user.target
-````
-
-<h4> Service's actions </h4>
-
-````
-service orginfo start
-service orginfo restart
-service orginfo status
-service orginfo enable
-service orginfo stop
-````
-
-<h3> SDKs setting </h3>
-<hr>
-<ul></ul>
-
-<h3> Environment </h3>
-<ul></ul>
 
 <h3>Json collection</h3>
 To use and call from API platform like "Postman":
