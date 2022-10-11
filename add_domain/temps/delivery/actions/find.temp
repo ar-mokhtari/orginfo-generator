@@ -1,0 +1,28 @@
+package delivery{{.AllLowName}}
+
+import (
+	dto "github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	usecase{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/{{.SnakeName}}"
+	"github.com/labstack/echo/v4"
+	"net/http"
+	"strconv"
+)
+
+func Find{{.UpperName}}() echo.HandlerFunc {
+	return func(c echo.Context) error {
+		var req dto.Find{{.UpperName}}Request
+		input := c.Param("id")
+		//sanitize data, prepare for send to usecase
+		{{.LowerName}}ID, err := strconv.Atoi(input)
+		if err != nil {
+			return c.JSON(http.StatusBadRequest, err)
+		}
+		req.ID = uint({{.LowerName}}ID)
+		//send data to usecase layer
+		res, err := usecase{{.UpperName}}.InitUsecase().Find{{.UpperName}}(c.Request().Context(), req)
+		if err != nil {
+			return c.JSON(http.StatusInternalServerError, err)
+		}
+		return c.JSON(http.StatusOK, res)
+	}
+}

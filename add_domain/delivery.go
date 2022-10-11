@@ -2,6 +2,7 @@ package adddomain
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
 	"io/ioutil"
@@ -12,6 +13,7 @@ import (
 
 func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	deliveryHttpV1Path := env.MainPath + env.Delivery + "/http/V1"
+	deliveryInit := deliveryHttpV1Path + "/init.go"
 	//---------------------------
 	//make directory for new domain (if exist return error)
 	if mkdirErr := os.MkdirAll(deliveryHttpV1Path+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
@@ -21,7 +23,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	filesNames := []string{"init", "delete", "new", "edit", "find", "get"}
 	// Create a new template and parse the temp into it.
 	for _, fileName := range filesNames {
-		tmpl, tempCreateErr := temp.ParseFiles(deliveryHttpV1Path + "/temp/" + fileName + ".temp")
+		tmpl, tempCreateErr := temp.ParseFiles("../temps/" + env.Delivery + "/actions/" + fileName + ".temp")
 		if tempCreateErr != nil {
 			return tempCreateErr
 		}
@@ -39,7 +41,15 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	}
 	//---------------------------
 	//add route init in delivery/http/V1/init.go
-	input, readErr := ioutil.ReadFile(deliveryHttpV1Path + "/init.go")
+	if _, existErr := os.Stat(deliveryInit); existErr != nil {
+		initFile, initCreateErr := os.Create(deliveryInit)
+		if initCreateErr != nil {
+			return initCreateErr
+		}
+		defer initFile.Close()
+		fmt.Fprintf(initFile, "[%s]: ", "package V1\n\nimport (\n\t\"github.com/labstack/echo/v4\"\n)\n\nfunc Init(echo *echo.Echo) {\n\n}\n")
+	}
+	input, readErr := ioutil.ReadFile(deliveryInit)
 	if readErr != nil {
 		return readErr
 	}

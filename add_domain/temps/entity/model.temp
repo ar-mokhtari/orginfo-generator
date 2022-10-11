@@ -1,0 +1,15 @@
+package entity{{.AllLowName}}
+
+import (
+    {{range .Fields}}{{if eq .Type "time.Time"}}"time" {{break}}{{end}}{{end}}
+)
+
+//this is a data model structure
+
+type (
+    {{.UpperName}} struct {
+        ID uint
+        {{.UpperName}}Name   string {{range .Fields}}
+        {{.Name}} {{.Type}} {{end}}
+    }
+)

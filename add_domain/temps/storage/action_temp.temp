@@ -1,0 +1,83 @@
+package storage
+
+import (
+	"context"
+	"errors"
+	"github.com/ar-mokhtari/orginfo/adapter/storage/models"
+	"github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
+	"gorm.io/gorm"
+)
+
+func (d *DBMS) Get{{.UpperName}}s(ctx context.Context) ([]entity{{.AllLowName}}.{{.UpperName}}, error) {
+	var storeResponse []storage.{{.UpperName}}
+	if err := d.gorm.WithContext(ctx).Find(&storeResponse).Error; err != nil {
+		return nil, err
+	}
+	{{.LowerName}}Entities := make([]entity{{.AllLowName}}.{{.UpperName}}, len(storeResponse))
+	for i := range storeResponse {
+		{{.LowerName}}Entities[i] = storage.Map{{.UpperName}}StoreToEntity(storeResponse[i])
+	}
+	return {{.LowerName}}Entities, nil
+}
+func (d *DBMS) New{{.UpperName}}(ctx context.Context, input{{.UpperName}} entity{{.AllLowName}}.{{.UpperName}}) error {
+	var {{.LowerName}} storage.{{.UpperName}}
+	{{.LowerName}} = storage.MapEntityTo{{.UpperName}}Store(input{{.UpperName}})
+	err := d.gorm.WithContext(ctx).Create(&{{.LowerName}}).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+func (d *DBMS) Edit{{.UpperName}}(ctx context.Context, new{{.UpperName}} entity{{.AllLowName}}.{{.UpperName}}) (entity{{.AllLowName}}.{{.UpperName}}, error) {
+	var {{.LowerName}} storage.{{.UpperName}}
+	{{.LowerName}} = storage.MapEntityTo{{.UpperName}}Store(new{{.UpperName}})
+	err := d.gorm.WithContext(ctx).First(&{{.LowerName}}).Save(&{{.LowerName}})
+	if err != nil {
+		return entity{{.AllLowName}}.{{.UpperName}}{}, err.Error
+	}
+	return storage.Map{{.UpperName}}StoreToEntity({{.LowerName}}), nil
+}
+func (d *DBMS) Find{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) (entity{{.AllLowName}}.{{.UpperName}}, error) {
+	var {{.LowerName}} storage.{{.UpperName}}
+	err := d.gorm.WithContext(ctx).Find(&{{.LowerName}}, {{.UpperName}}ID).Error
+	if err != nil {
+		return entity{{.AllLowName}}.{{.UpperName}}{}, err
+	}
+	return storage.Map{{.UpperName}}StoreToEntity({{.LowerName}}), nil
+}
+func (d *DBMS) Find{{.UpperName}}By{{.UpperName}}Name(ctx context.Context, {{.UpperName}}Name string) (entity{{.AllLowName}}.{{.UpperName}}, error) {
+	return entity{{.AllLowName}}.{{.UpperName}}{}, nil
+}
+func (d *DBMS) Delete{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) error {
+	// DELETE FROM {{.LowerName}}s WHERE id = {{.UpperName}}ID;
+	err := d.gorm.Delete(&storage.{{.UpperName}}{}, {{.UpperName}}ID).Error
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d *DBMS) {{.UpperName}}NameExist(ctx context.Context, input string) error {
+	var {{.LowerName}} entity{{.AllLowName}}.{{.UpperName}}
+	err := d.gorm.WithContext(ctx).Where("{{.LowerName}}Name LIKE ?", "%"+input+"%").Find(&{{.LowerName}}).Error
+	if err != nil {
+		return err
+	}
+	if {{.LowerName}} != (entity{{.AllLowName}}.{{.UpperName}}{}) {
+		return errors.New("{{.LowerName}}Name exist")
+	}
+	return nil
+}
+
+// this method is for validation dependencies which must respect
+func (d *DBMS) Is{{.UpperName}}Exist(ctx context.Context, {{.LowerName}}ID uint) (bool, error) {
+	// SELECT * FROM {{.LowerName}}s WHERE id = {{.LowerName}}ID;
+	err := d.gorm.WithContext(ctx).First(&storage.{{.UpperName}}{}, {{.LowerName}}ID).Error
+	if err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return false, nil
+		}
+		return false, err
+	}
+	return true, nil
+}

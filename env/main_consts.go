@@ -1,5 +1,5 @@
 package env
 
-const (
+var (
 	MainPath = "/home/aliz/go/src/orginfo/"
 )

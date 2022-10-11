@@ -1,0 +1,18 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	dto "github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+)
+
+type (
+	ValidatorNew{{.UpperName}}Protocol    func(ctx context.Context, req dto.New{{.UpperName}}Request) error
+    ValidatorEdit{{.UpperName}}Protocol   func(ctx context.Context, req dto.Edit{{.UpperName}}Request) error
+	ValidatorDelete{{.UpperName}}Protocol func(ctx context.Context, req dto.Delete{{.UpperName}}Request) error
+	ValidationFind{{.UpperName}}Protocol  func(ctx context.Context, req dto.Find{{.UpperName}}Request) error
+)
+type (
+	ValidatorStorage interface {
+		Is{{.UpperName}}Exist(ctx context.Context, {{.LowerName}}ID uint) (bool, error)
+	}
+)

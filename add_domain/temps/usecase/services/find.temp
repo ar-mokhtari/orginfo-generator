@@ -1,0 +1,23 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	"github.com/ar-mokhtari/orginfo/adapter/storage"
+	"github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/validation/{{.SnakeName}}"
+)
+
+func (uc Usecase) Find{{.UpperName}}(ctx context.Context, req dto.Find{{.UpperName}}Request) (dto.Find{{.UpperName}}Response, error) {
+	//validate req
+	protocolFunc := validation{{.UpperName}}.Find{{.UpperName}}Validate
+	pErr := protocolFunc()(ctx, req)
+	if pErr != nil {
+		return dto.Find{{.UpperName}}Response{}, pErr
+	}
+	//try to find {{.LowerName}} from storage layer
+	res, err := storage.DB.Find{{.UpperName}}(ctx, req.ID)
+	if err != nil {
+		return dto.Find{{.UpperName}}Response{}, err
+	}
+	return dto.Find{{.UpperName}}Response{ {{.UpperName}}: res }, nil
+}

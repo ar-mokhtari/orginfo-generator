@@ -2,6 +2,7 @@ package adddomain
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
 	"io/ioutil"
@@ -12,8 +13,27 @@ import (
 
 func DomainStorageGenerator(domain entity.Domain) error {
 	storagePath := env.MainPath + "adapter/storage/"
+	//make storage directory if not exist
+	if mkdirErr := os.MkdirAll(storagePath+"models", os.ModePerm); mkdirErr != nil {
+		return mkdirErr
+	}
+	//add setup.go in adapter/storage/ if not exist
+	storeFiles := map[uint8][]string{
+		0: {"setup", "package storage\n\nimport (\n\tstorage \"" + env.MainPath + "adapter/storage/models\"\n\t\"gorm.io/driver/mysql\"\n\t\"gorm.io/gorm\"\n)\n\ntype DBMS struct {\n\tgorm *gorm.DB\n}\n\nfunc GormConnect(dsn string) (DBMS, error) {\n\tdb, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})\n\tif err != nil {\n\t\treturn DBMS{}, err\n\t}\n\treturn DBMS{gorm: db}, nil\n}\n\nfunc GormAutoMigrate(db gorm.DB) error {\n\t// Migrate the schema\n\terr := db.AutoMigrate()\n\tif err != nil {\n\t\tpanic(\"Storage auto migrate has error\")\n\t}\n\treturn err\n}\n"},
+		1: {"init", "package storage\n\nimport (\n\t\"fmt\"\n)\n\nvar DB DBMS\n\nfunc Init() {\n\tvar eErr error\n\t//I. Define a data source name (DSN)\n\tdsn := \"user:g#Y!298mKwz85@tcp(127.0.0.1:3306)/orginfo?charset=utf8mb4&parseTime=True&loc=Local\"\n\t//II. Try to connect to dsn address\n\tDB, eErr = GormConnect(dsn)\n\t//III. If gorm connect successfully then try to migrate database\n\tif eErr == nil {\n\t\terr := GormAutoMigrate(*DB.gorm)\n\t\tif err != nil {\n\t\t\tfmt.Errorf(\"some error .... %#v\", err)\n\t\t}\n\t}\n}\n"},
+	}
+	for _, part := range storeFiles {
+		if _, existErr := os.Stat(storagePath + part[0] + ".go"); existErr != nil {
+			setupFile, setupCreateErr := os.Create(storagePath + part[0] + ".go")
+			if setupCreateErr != nil {
+				return setupCreateErr
+			}
+			fmt.Fprintf(setupFile, "[%s]: ", part[1])
+			defer setupFile.Close()
+		}
+	}
 	// create and exe temp for model
-	domainTemp, domainTempErr := temp.ParseFiles(storagePath + "models/temp.temp")
+	domainTemp, domainTempErr := temp.ParseFiles("../temps/storage/models/temp.temp")
 	if domainTempErr != nil {
 		return domainTempErr
 	}
@@ -26,13 +46,13 @@ func DomainStorageGenerator(domain entity.Domain) error {
 		return tempExeErr
 	}
 	// create and exe temp for actions
-	actionsTemp, actionsTempErr := temp.ParseFiles(storagePath + "action_temp.temp")
+	actionsTemp, actionsTempErr := temp.ParseFiles("../temps/storage/action_temp.temp")
 	if actionsTempErr != nil {
 		return actionsTempErr
 	}
-	domainActionFile, fileModelErr := os.Create(storagePath + "action_" + domain.SnakeName + ".go")
-	if fileModelErr != nil {
-		return fileModelErr
+	domainActionFile, actionErr := os.Create(storagePath + "action_" + domain.SnakeName + ".go")
+	if actionErr != nil {
+		return actionErr
 	}
 	tempActionExeErr := actionsTemp.Execute(domainActionFile, domain)
 	if tempActionExeErr != nil {

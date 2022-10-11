@@ -1,0 +1,14 @@
+package delivery{{.AllLowName}}
+
+import (
+	"github.com/ar-mokhtari/orginfo/adapter/storage"
+	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
+)
+
+type Usecase struct {
+	storage entity{{.AllLowName}}.Services
+}
+
+func InitUsecase() Usecase {
+	return Usecase{storage: &storage.DB}
+}

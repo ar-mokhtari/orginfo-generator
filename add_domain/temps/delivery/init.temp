@@ -1,0 +1,10 @@
+package V1
+
+import (
+	delivery{{.UpperName}} "github.com/ar-mokhtari/orginfo/delivery/http/V1/{{.lowerName}}"
+	"github.com/labstack/echo/v4"
+)
+
+func Init(echo *echo.Echo) {
+	delivery{{.UpperName}}.Routs(echo)
+}

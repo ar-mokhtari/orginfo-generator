@@ -1,0 +1,33 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	"github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
+	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/validation/{{.SnakeName}}"
+)
+
+func (uc Usecase) Edit{{.UpperName}}(ctx context.Context, input{{.UpperName}} dto.Edit{{.UpperName}}Request) (dto.Edit{{.UpperName}}Response, error) {
+	//validate
+	validateFunc := validation{{.UpperName}}.Edit{{.UpperName}}Validate
+	errValidate := validateFunc()(ctx, input{{.UpperName}})
+	if errValidate != nil {
+		return dto.Edit{{.UpperName}}Response{}, errValidate
+	}
+	//sanitize
+	//convert some field like DOB(date of birth) to right type (ex:string to time.Time)
+
+	//prepare an entity model
+	{{.LowerName}} := entity{{.AllLowName}}.{{.UpperName}}{
+		ID:         input{{.UpperName}}.ID,
+		{{.UpperName}}Name:   input{{.UpperName}}.{{.UpperName}}Name,
+        {{range .Fields}}
+        {{.Name}}:  input{{$.UpperName}}.{{.Name}}, {{end}}
+	}
+	//try to update storage
+	edited{{.UpperName}}, editErr := uc.storage.Edit{{.UpperName}}(ctx, {{.LowerName}})
+	if editErr != nil {
+		return dto.Edit{{.UpperName}}Response{}, editErr
+	}
+	return dto.Edit{{.UpperName}}Response{Edited{{.UpperName}}: edited{{.UpperName}}}, nil
+}

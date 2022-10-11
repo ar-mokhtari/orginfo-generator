@@ -1,0 +1,31 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	"github.com/ar-mokhtari/orginfo/adapter/storage"
+	"github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
+	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/validation/{{.SnakeName}}"
+)
+
+func (uc Usecase) New{{.UpperName}}(ctx context.Context, req dto.New{{.UpperName}}Request) error {
+	//validation DTO request
+	protocolFunc := validation{{.UpperName}}.New{{.UpperName}}Validate
+	pErr := protocolFunc()(ctx, req)
+	if pErr != nil {
+		return pErr
+	}
+	//Sanitize DTO request
+
+	var entityModel entity{{.AllLowName}}.{{.UpperName}}
+    entityModel.{{.UpperName}}Name = req.{{.UpperName}}Name
+    {{range .Fields}}
+    entityModel.{{.Name}} = req.{{.Name}}{{end}}
+
+	//Try to insert DTO request to storage repository
+	err := storage.DB.New{{.UpperName}}(ctx, entityModel)
+	if err != nil {
+		return err
+	}
+	return nil
+}

@@ -1,0 +1,56 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	"fmt"
+	"github.com/ar-mokhtari/orginfo/adapter/storage"
+	dto "github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	validation "github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
+)
+
+func is{{.UpperName}}Exist(ctx context.Context, storage ValidatorStorage) validation.RuleFunc {
+	return func(value interface{}) error {
+		{{.LowerName}}ID := value.(uint)
+		ok, err := storage.Is{{.UpperName}}Exist(ctx, {{.LowerName}}ID)
+		if err != nil {
+			return fmt.Errorf("%v", err)
+		}
+		if !ok {
+			return fmt.Errorf("{{.LowerName}}: %d does not exist", {{.LowerName}}ID)
+		}
+		return nil
+	}
+}
+
+func Delete{{.UpperName}}Validate() ValidatorDelete{{.UpperName}}Protocol {
+	return func(ctx context.Context, req dto.Delete{{.UpperName}}Request) error {
+		return validation.ValidateStruct(&req,
+			validation.Field(&req.ID, validation.Required),
+			validation.Field(&req.ID, validation.By(is{{.UpperName}}Exist(ctx, &storage.DB))),
+		)
+	}
+}
+
+func New{{.UpperName}}Validate() ValidatorNew{{.UpperName}}Protocol {
+	return func(ctx context.Context, req dto.New{{.UpperName}}Request) error {
+		return validation.ValidateStruct(&req,
+			validation.Field(&req.{{.UpperName}}Name, validation.Required, is.Alphanumeric, validation.Length(3, 15)),
+		)
+	}
+}
+func Edit{{.UpperName}}Validate() ValidatorEdit{{.UpperName}}Protocol {
+	return func(ctx context.Context, req dto.Edit{{.UpperName}}Request) error {
+		return validation.ValidateStruct(&req,
+			validation.Field(&req.{{.UpperName}}Name, validation.Required, is.Alphanumeric, validation.Length(3, 15)),
+		)
+	}
+}
+func Find{{.UpperName}}Validate() ValidationFind{{.UpperName}}Protocol {
+	return func(ctx context.Context, req dto.Find{{.UpperName}}Request) error {
+		return validation.ValidateStruct(&req,
+			validation.Field(&req.ID, validation.Required),
+			validation.Field(&req.ID, validation.By(is{{.UpperName}}Exist(ctx, &storage.DB))),
+		)
+	}
+}

@@ -1,0 +1,11 @@
+package entity{{.AllLowName}}
+
+import "context"
+type Services interface {
+	Get{{.UpperName}}s(ctx context.Context) ([]{{.UpperName}}, error)
+    New{{.UpperName}}(ctx context.Context, input{{.UpperName}} {{.UpperName}}) error
+    Edit{{.UpperName}}(ctx context.Context, new{{.UpperName}} {{.UpperName}}) ({{.UpperName}}, error)
+    Find{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) ({{.UpperName}}, error)
+    Find{{.UpperName}}By{{.UpperName}}Name(ctx context.Context, {{.UpperName}}Name string) ({{.UpperName}}, error)
+    Delete{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) error
+}

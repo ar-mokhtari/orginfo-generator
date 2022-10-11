@@ -1,0 +1,35 @@
+package storage
+
+import (
+	entity{{.AllLowName}} "github.com/ar-mokhtari/orginfo/entity/{{.SnakeName}}"
+	"gorm.io/gorm"
+    "time"
+
+)
+
+type {{.UpperName}} struct {
+	gorm.Model
+    {{.UpperName}}Name   string     `gorm:"unique; not null" json:"{{.SnakeName}}_name"`
+    {{range .Fields}}
+    {{.Name}} {{.Type}} `json:"{{.JsonName}}"`{{end}}
+    //to don't insert value in "updated_at" at "insert mode" :
+    //see more: https://gorm.io/docs/update.html
+    UpdatedAt  *time.Time `json:"updated_at" gorm:"<-:update"`
+}
+
+func Map{{.UpperName}}StoreToEntity({{.LowerName}} {{.UpperName}}) entity{{.AllLowName}}.{{.UpperName}} {
+	return entity{{.AllLowName}}.{{.UpperName}}{
+		ID:         {{.LowerName}}.ID,
+        {{.UpperName}}Name: {{.LowerName}}.{{.UpperName}}Name,
+        {{range .Fields}}
+        {{.Name}}:  {{$.LowerName}}.{{.Name}}, {{end}}
+	}
+}
+
+func MapEntityTo{{.UpperName}}Store(input entity{{.AllLowName}}.{{.UpperName}}) {{.UpperName}} {
+	return {{.UpperName}}{
+	    {{.UpperName}}Name: input.{{.UpperName}}Name,
+        {{range .Fields}}
+        {{.Name}}:  input.{{.Name}}, {{end}}
+	}
+}

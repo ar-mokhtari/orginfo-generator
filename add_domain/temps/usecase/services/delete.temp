@@ -1,0 +1,22 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	"github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+	validation{{.UpperName}} "github.com/ar-mokhtari/orginfo/usecase/validation/{{.SnakeName}}"
+)
+
+func (uc Usecase) Delete{{.UpperName}}(ctx context.Context, req dto.Delete{{.UpperName}}Request) (dto.Delete{{.UpperName}}Response, error) {
+	//validate req for delete
+	protocolFunc := validation{{.UpperName}}.Delete{{.UpperName}}Validate
+	pErr := protocolFunc()(ctx, req)
+	if pErr != nil {
+		return dto.Delete{{.UpperName}}Response{}, pErr
+	}
+	//try to delete from storage
+	err := uc.storage.Delete{{.UpperName}}(ctx, req.ID)
+	if err != nil {
+		return dto.Delete{{.UpperName}}Response{}, err
+	}
+	return dto.Delete{{.UpperName}}Response{}, nil
+}

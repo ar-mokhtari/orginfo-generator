@@ -1,0 +1,14 @@
+package delivery{{.AllLowName}}
+
+import (
+	"context"
+	"github.com/ar-mokhtari/orginfo/dto/{{.SnakeName}}"
+)
+
+func (uc Usecase) Get{{.UpperName}}s(ctx context.Context) (dto.Get{{.UpperName}}Response, error) {
+	{{.LowerName}}s, err := uc.storage.Get{{.UpperName}}s(ctx)
+	if err != nil {
+		return dto.Get{{.UpperName}}Response{}, err
+	}
+	return dto.Get{{.UpperName}}Response{ {{.UpperName}}s: {{.LowerName}}s }, nil
+}
