@@ -21,14 +21,14 @@ func addInit(input entity.Domain) {
 	if dtoErr != nil {
 		fmt.Println(dtoErr)
 	} else {
-		fmt.Printf("[%s] Domain for %s created successfully \n", input.SnakeName, env.DTO)
+		fmt.Printf("%s Domain for %s created successfully \n", input.SnakeName, env.DTO)
 	}
 	//adapter
 	adapterStorageErr := adddomain.DomainStorageGenerator(input)
 	if adapterStorageErr != nil {
 		fmt.Println(adapterStorageErr)
 	} else {
-		fmt.Printf("[%s] Domain for %s created successfully \n", input.SnakeName, env.Adapter+" -storage")
+		fmt.Printf("%s Domain for %s created successfully \n", input.SnakeName, env.Adapter+" -storage")
 	}
 
 	//delivery
@@ -36,20 +36,20 @@ func addInit(input entity.Domain) {
 	if deliveryErr != nil {
 		fmt.Println(deliveryErr)
 	} else {
-		fmt.Printf("[%s] Domain for %s created successfully \n", input.SnakeName, env.Delivery)
+		fmt.Printf("%s Domain for %s created successfully \n", input.SnakeName, env.Delivery)
 	}
 	//entity
 	entityErr := adddomain.DomainEntityGenerator(input)
 	if entityErr != nil {
 		fmt.Println(dtoErr)
 	} else {
-		fmt.Printf("[%s] Domain for %s created successfully \n", input.SnakeName, env.Entity)
+		fmt.Printf("%s Domain for %s created successfully \n", input.SnakeName, env.Entity)
 	}
 	//usecase
 	usecaseErr := adddomain.DomainUsecaseGenerator(input)
 	if usecaseErr != nil {
 		fmt.Println(usecaseErr)
 	} else {
-		fmt.Printf("[%s] Domain for %s created successfully \n", input.SnakeName, env.Usecase)
+		fmt.Printf("%s Domain for %s created successfully \n", input.SnakeName, env.Usecase)
 	}
 }

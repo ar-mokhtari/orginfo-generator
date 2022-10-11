@@ -16,7 +16,7 @@ func DomainEntityGenerator(domain entity.Domain) (err error) {
 	// Create a new template and parse the temp into it.
 	for _, fileName := range []string{"model", "protocol"} {
 		//tmpl, tempCreateErr := temp.ParseFiles("../entity/" + fileName + ".temp")
-		tmpl, tempCreateErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Entity + "/" + fileName + ".temp")
+		tmpl, tempCreateErr := temp.ParseFiles(env.MainRepository + "add_domain/temps/" + env.Entity + "/" + fileName + ".temp")
 		if tempCreateErr != nil {
 			return tempCreateErr
 		}
