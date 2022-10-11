@@ -12,7 +12,7 @@ import (
 func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 	//---------------------------
 	//make usecase directory if not exist
-	if mkdirErr := os.MkdirAll(env.MainPath+"usecase/validation", os.ModePerm); mkdirErr != nil {
+	if mkdirErr := os.MkdirAll(env.MainPath+"usecase/validation/others", os.ModePerm); mkdirErr != nil {
 		return mkdirErr
 	}
 	//make directory for new domain (if exist return error)
