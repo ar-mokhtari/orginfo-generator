@@ -10,7 +10,7 @@ import (
 func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 	//---------------------------
 	//make directory for new domain (if exist return error)
-	if mkdirErr := os.Mkdir(env.MainPath+env.Usecase+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
+	if mkdirErr := os.MkdirAll(env.MainPath+env.Usecase+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
 		return mkdirErr
 	}
 	//create init file name in first index
@@ -35,7 +35,7 @@ func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 	}
 	//---------------------------
 	//make directory for new "validation" domain (if exist return error)
-	if mkdirErr := os.Mkdir(env.MainPath+env.Usecase+"/validation/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
+	if mkdirErr := os.MkdirAll(env.MainPath+env.Usecase+"/validation/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
 		return mkdirErr
 	}
 	tempProtocol, protocolErr := temp.ParseFiles(env.MainPath + env.Usecase + "/validation/temp/protocol.temp")

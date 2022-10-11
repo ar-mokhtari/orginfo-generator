@@ -16,7 +16,7 @@ func DomainDTOGenerator(domain entity.Domain) (err error) {
 		return tempCreateErr
 	}
 	//make directory for new domain (if exist return error)
-	if mkdirErr := os.Mkdir(env.MainPath+"dto/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
+	if mkdirErr := os.MkdirAll(env.MainPath+"dto/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
 		return mkdirErr
 	}
 	//create dto file for new domain

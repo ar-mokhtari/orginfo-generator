@@ -14,7 +14,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	deliveryHttpV1Path := env.MainPath + env.Delivery + "/http/V1"
 	//---------------------------
 	//make directory for new domain (if exist return error)
-	if mkdirErr := os.Mkdir(deliveryHttpV1Path+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
+	if mkdirErr := os.MkdirAll(deliveryHttpV1Path+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
 		return mkdirErr
 	}
 	//create action(s)
