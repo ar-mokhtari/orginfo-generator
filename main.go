@@ -7,7 +7,7 @@ import (
 
 func New() {
 	//main root
-	fmt.Sprintf("root is: %s", os.Args[1:])
+	fmt.Printf("root is: %s", os.Args[1:])
 	//prepare command(s) with flag(s)
 	flagErr := rootCommand(os.Args[1:])
 	if flagErr != nil {
