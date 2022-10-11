@@ -23,7 +23,9 @@ func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 	fileNames := []string{"init", "delete", "new", "edit", "find", "get"}
 	// Create a new template and parse the temp into it.
 	for _, fileName := range fileNames {
-		tmpl, tempCreateErr := temp.ParseFiles("../temps/usecase/services/" + fileName + ".temp")
+		//tmpl, tempCreateErr := temp.ParseFiles("../temps/usecase/services/" + fileName + ".temp")
+		tmpl, tempCreateErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Usecase + "/services/" + fileName + ".temp")
+
 		if tempCreateErr != nil {
 			return tempCreateErr
 		}
@@ -52,11 +54,13 @@ func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 	if mkdirErr := os.MkdirAll(env.MainPath+env.Usecase+"/validation/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
 		return mkdirErr
 	}
-	tempProtocol, protocolErr := temp.ParseFiles("../temps/usecase/validation/temp/protocol.temp")
+	//tempProtocol, protocolErr := temp.ParseFiles("../temps/usecase/validation/temp/protocol.temp")
+	tempProtocol, protocolErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Usecase + "/validation/temp/protocol.temp")
 	if protocolErr != nil {
 		return protocolErr
 	}
-	tempValidator, validatorErr := temp.ParseFiles("../temps/usecase/validation/temp/temp_validator.temp")
+	//tempValidator, validatorErr := temp.ParseFiles("../temps/usecase/validation/temp/temp_validator.temp")
+	tempValidator, validatorErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Usecase + "/validation/temp/temp_validator.temp")
 	if validatorErr != nil {
 		return validatorErr
 	}

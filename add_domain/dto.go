@@ -11,7 +11,8 @@ func DomainDTOGenerator(domain entity.Domain) (err error) {
 	//dto
 	//---------------------------
 	// Create a new template and parse the temp into it.
-	tmpl, tempCreateErr := temp.ParseFiles("../dto/temp.temp")
+	//tmpl, tempCreateErr := temp.ParseFiles("../dto/temp.temp")
+	tmpl, tempCreateErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.DTO + "/temp.temp")
 	if tempCreateErr != nil {
 		return tempCreateErr
 	}

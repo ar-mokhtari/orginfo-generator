@@ -24,7 +24,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	filesNames := []string{"init", "delete", "new", "edit", "find", "get"}
 	// Create a new template and parse the temp into it.
 	for _, fileName := range filesNames {
-		tmpl, tempCreateErr := temp.ParseFiles("../temps/" + env.Delivery + "/actions/" + fileName + ".temp")
+		tmpl, tempCreateErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Delivery + "/actions/" + fileName + ".temp")
 		if tempCreateErr != nil {
 			return tempCreateErr
 		}

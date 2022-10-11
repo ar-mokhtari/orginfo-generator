@@ -34,7 +34,8 @@ func DomainStorageGenerator(domain entity.Domain) error {
 		}
 	}
 	// create and exe temp for model
-	domainTemp, domainTempErr := temp.ParseFiles("../temps/storage/models/temp.temp")
+	//domainTemp, domainTempErr := temp.ParseFiles("../temps/storage/models/temp.temp")
+	domainTemp, domainTempErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Adapter + "/models/temp.temp")
 	if domainTempErr != nil {
 		return domainTempErr
 	}
@@ -47,7 +48,8 @@ func DomainStorageGenerator(domain entity.Domain) error {
 		return tempExeErr
 	}
 	// create and exe temp for actions
-	actionsTemp, actionsTempErr := temp.ParseFiles("../temps/storage/action_temp.temp")
+	//actionsTemp, actionsTempErr := temp.ParseFiles("../temps/storage/action_temp.temp")
+	actionsTemp, actionsTempErr := temp.ParseFiles(env.MainPath + "src/github.com/ar-mokhtari/orginfo-generator/add_domain/temps/" + env.Adapter + "/action_temp.temp")
 	if actionsTempErr != nil {
 		return actionsTempErr
 	}
