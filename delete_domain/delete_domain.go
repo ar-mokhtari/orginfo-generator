@@ -48,16 +48,18 @@ func DeleteDomain(domain entity.Domain) error {
 
 	//remove domain model for migrate in env.MainPath +"adapter/storage/setup.go"
 	storagePath := env.MainPath + "adapter/storage/setup.go"
-	storageInput, readStoreErr := ioutil.ReadFile(storagePath)
-	if readStoreErr != nil {
-		return readStoreErr
-	}
-	storeContentText := "storage." + domain.UpperName + "{}, "
-	storeTextExist := strings.Contains(string(storageInput), storeContentText)
-	if storeTextExist {
-		output := bytes.Replace(storageInput, []byte(storeContentText), []byte(nil), -1)
-		if writeErr := ioutil.WriteFile(storagePath, output, 0666); writeErr != nil {
-			return writeErr
+	if _, existErr := os.Stat(storagePath); !errors.Is(existErr, os.ErrNotExist) {
+		storageInput, readStoreErr := ioutil.ReadFile(storagePath)
+		if readStoreErr != nil {
+			return readStoreErr
+		}
+		storeContentText := "storage." + domain.UpperName + "{}, "
+		storeTextExist := strings.Contains(string(storageInput), storeContentText)
+		if storeTextExist {
+			output := bytes.Replace(storageInput, []byte(storeContentText), []byte(nil), -1)
+			if writeErr := ioutil.WriteFile(storagePath, output, 0666); writeErr != nil {
+				return writeErr
+			}
 		}
 	}
 	return nil
