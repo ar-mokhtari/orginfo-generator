@@ -2,8 +2,8 @@ package generator
 
 import (
 	"fmt"
-	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo-generator/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/env"
 	adddomain "orginfo-generator/add_domain"
 	deletedomain "orginfo-generator/delete_domain"
 )

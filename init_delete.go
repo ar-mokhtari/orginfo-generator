@@ -2,7 +2,7 @@ package generator
 
 import (
 	"fmt"
-	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/entity"
 )
 
 func deleteInit(inputDomain entity.Domain) {

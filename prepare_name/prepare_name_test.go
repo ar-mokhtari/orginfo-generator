@@ -1,7 +1,7 @@
 package preparename
 
 import (
-	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"testing"
 )
 

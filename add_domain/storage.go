@@ -2,8 +2,8 @@ package adddomain
 
 import (
 	"bytes"
-	"github.com/ar-mokhtari/orginfo-generator/config/cli/generator/entity"
-	"github.com/ar-mokhtari/orginfo-generator/config/env"
+	"github.com/ar-mokhtari/orginfo-generator/entity"
+	"github.com/ar-mokhtari/orginfo-generator/env"
 	"io/ioutil"
 	"os"
 	"strings"
