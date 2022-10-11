@@ -2,6 +2,7 @@ package deletedomain
 
 import (
 	"bytes"
+	"errors"
 	"github.com/ar-mokhtari/orginfo-generator/entity"
 	"github.com/ar-mokhtari/orginfo-generator/env"
 	"io/ioutil"
@@ -28,20 +29,23 @@ func DeleteDomain(domain entity.Domain) error {
 	}
 	//remove domain route init in env.MainPath + env.Delivery + "/http/V1/init.go"
 	deliveryHttpV1Path := env.MainPath + env.Delivery + "/http/V1/init.go"
-	input, readErr := ioutil.ReadFile(deliveryHttpV1Path)
-	if readErr != nil {
-		return readErr
-	}
-	contentText := "\n\t" + env.Delivery + domain.UpperName + ".Routs(echo)"
-	contentImportText := "\n\t" + env.Delivery + domain.UpperName + " " + `"` + "github.com/ar-mokhtari/orginfo-generator/delivery/http/V1/" + domain.SnakeName + `"`
-	textExist := strings.Contains(string(input), contentText)
-	if textExist {
-		output := bytes.Replace(input, []byte(contentText), []byte(nil), -1)
-		output = bytes.Replace(output, []byte(contentImportText), []byte(nil), -1)
-		if writeErr := ioutil.WriteFile(deliveryHttpV1Path, output, 0666); writeErr != nil {
-			return writeErr
+	if _, existErr := os.Stat(deliveryHttpV1Path); !errors.Is(existErr, os.ErrNotExist) {
+		input, readErr := ioutil.ReadFile(deliveryHttpV1Path)
+		if readErr != nil {
+			return readErr
+		}
+		contentText := "\n\t" + env.Delivery + domain.UpperName + ".Routs(echo)"
+		contentImportText := "\n\t" + env.Delivery + domain.UpperName + " " + `"` + "github.com/ar-mokhtari/orginfo-generator/delivery/http/V1/" + domain.SnakeName + `"`
+		textExist := strings.Contains(string(input), contentText)
+		if textExist {
+			output := bytes.Replace(input, []byte(contentText), []byte(nil), -1)
+			output = bytes.Replace(output, []byte(contentImportText), []byte(nil), -1)
+			if writeErr := ioutil.WriteFile(deliveryHttpV1Path, output, 0666); writeErr != nil {
+				return writeErr
+			}
 		}
 	}
+
 	//remove domain model for migrate in env.MainPath +"adapter/storage/setup.go"
 	storagePath := env.MainPath + "adapter/storage/setup.go"
 	storageInput, readStoreErr := ioutil.ReadFile(storagePath)
