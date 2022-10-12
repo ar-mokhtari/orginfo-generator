@@ -71,6 +71,11 @@ func main() {
 }
 
 " > project_name/cli/generator/main.go && cat project_name/cli/generator/main.go
+&&
+echo "package main
+
+func main() {
+}" > main.go && cat main.go
 
 ````
 
