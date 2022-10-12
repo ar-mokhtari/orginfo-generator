@@ -74,8 +74,16 @@ func main() {
 &&
 echo "package main
 
+func init() {
+	//initialise D.B.M.S. (Database management system)
+	storage.Init()
+	//initialise new Echo (web framework)
+	http.Init()
+}
+
 func main() {
-}" > main.go && cat main.go
+
+}" > project_name/main.go && project_name/cat main.go
 
 ````
 
