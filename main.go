@@ -14,7 +14,7 @@ func New() {
 		fmt.Printf("error: %s", err.Error())
 	}
 	spilitedPwd := strings.Split(pwd, "/")
-	mainPathSlice := spilitedPwd[:len(spilitedPwd)-2]
+	mainPathSlice := spilitedPwd[:6]
 	env.MainRepositoryPath = strings.Join(spilitedPwd[5:6], "/")
 	env.MainPath = strings.Join(mainPathSlice, "/") + "/"
 	//-------find project path---------
