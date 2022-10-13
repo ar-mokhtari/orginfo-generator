@@ -59,7 +59,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 			return initCreateErr
 		}
 		defer initFile.Close()
-		fmt.Fprintf(initFile, "%s: ", "package V1\n\nimport (\n\t\"github.com/labstack/echo/v4\"\n)\n\nfunc Init(echo *echo.Echo) {\n\n}\n")
+		fmt.Fprintf(initFile, "%s", "package V1\n\nimport (\n\t\"github.com/labstack/echo/v4\"\n)\n\nfunc Init(echo *echo.Echo) {\n\n}\n")
 	}
 	input, readErr := ioutil.ReadFile(deliveryInit)
 	if readErr != nil {

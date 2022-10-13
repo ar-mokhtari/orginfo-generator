@@ -61,7 +61,7 @@ go get github.com/go-ozzo/ozzo-validation
 to create new domain with CRUD operation and other prerequisite:
 
 ````
-export GO111MODULE="on" && cd ~/go/src &&
+cd ~/go/src &&
 project_name="new_project" &&
 mkdir -p -m777 $project_name/cli/generator &&
 echo "package main
@@ -117,7 +117,7 @@ require (
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
 	golang.org/x/text v0.3.7 // indirect
-)" > $project_name/go.mod && cd $project_name/cli/generator && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator  && go build 
+)" > $project_name/go.mod && cd $project_name/cli/generator  && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator && go build && export GO111MODULE="off" && go get ./. && export GO111MODULE="auto"
 
 ````
 
