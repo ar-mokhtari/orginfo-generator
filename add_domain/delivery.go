@@ -15,6 +15,10 @@ import (
 func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	deliveryHttpV1Path := env.MainPath + env.Delivery + "/http/V1"
 	deliveryInit := deliveryHttpV1Path + "/init.go"
+	//make directory for new domain (if exist return error)
+	if mkdirErr := os.MkdirAll(deliveryHttpV1Path+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
+		return mkdirErr
+	}
 	//---------------------------
 	//add delivery/http/init.go if not exist
 	_, errHttpInit := os.Stat(env.MainPath + env.Delivery + "/http/init.go")
@@ -27,10 +31,6 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 		defer httpInit.Close()
 	}
 	//---------------------------
-	//make directory for new domain (if exist return error)
-	if mkdirErr := os.MkdirAll(deliveryHttpV1Path+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
-		return mkdirErr
-	}
 	//create action(s)
 	filesNames := []string{"init", "delete", "new", "edit", "find", "get"}
 	// Create a new template and parse the temp into it.
