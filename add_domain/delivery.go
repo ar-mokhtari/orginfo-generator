@@ -19,7 +19,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	//add delivery/http/init.go if not exist
 	_, errHttpInit := os.Stat(env.MainPath + env.Delivery + "/http/init.go")
 	if errors.Is(errHttpInit, os.ErrNotExist) {
-		httpInit, httpInitCreateErr := os.Create(env.MainPath + env.Delivery + "http/init.go")
+		httpInit, httpInitCreateErr := os.Create(env.MainPath + env.Delivery + "/http/init.go")
 		if httpInitCreateErr != nil {
 			return httpInitCreateErr
 		}
