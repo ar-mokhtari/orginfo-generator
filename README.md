@@ -62,7 +62,7 @@ to create new domain with CRUD operation and other prerequisite:
 
 ````
 cd ~/go/src &&
-project_name="new_project" &&
+project_name="myproject" &&
 mkdir -p -m777 $project_name/cli/generator &&
 echo "package main
 
