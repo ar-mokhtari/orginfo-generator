@@ -16,6 +16,16 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 	deliveryHttpV1Path := env.MainPath + env.Delivery + "/http/V1"
 	deliveryInit := deliveryHttpV1Path + "/init.go"
 	//---------------------------
+	//add delivery/http/init.go if not exist
+	_, errHttpInit := os.Stat(env.MainPath + env.Delivery + "http/init.go")
+	if errors.Is(errHttpInit, os.ErrNotExist) {
+		httpInit, httpInitCreateErr := os.Create(env.MainPath + env.Delivery + "http/init.go")
+		if httpInitCreateErr != nil {
+			return httpInitCreateErr
+		}
+		defer httpInit.Close()
+	}
+	//---------------------------
 	//make directory for new domain (if exist return error)
 	if mkdirErr := os.MkdirAll(deliveryHttpV1Path+"/"+domain.SnakeName, os.ModePerm); mkdirErr != nil {
 		return mkdirErr
