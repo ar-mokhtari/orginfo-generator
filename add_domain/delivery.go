@@ -55,7 +55,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 		return readErr
 	}
 	contentText := env.Delivery + domain.UpperName + ".Routs(echo)"
-	contentImport := "import (\n\t" + env.Delivery + domain.UpperName + ` "` + "github.com/ar-mokhtari/orginfo-generator/delivery/http/V1/" + domain.SnakeName + `"`
+	contentImport := "import (\n\t" + env.Delivery + domain.UpperName + ` "` + env.MainRepositoryPath + "/delivery/http/V1/" + domain.SnakeName + `"`
 	textExist := strings.Contains(string(input), contentText)
 	if !textExist {
 		output := bytes.Replace(input, []byte("}"), []byte("\t"+contentText+"\n}"), -1)
