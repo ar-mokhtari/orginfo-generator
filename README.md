@@ -117,15 +117,8 @@ require (
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
 	golang.org/x/text v0.3.7 // indirect
-)" > $project_name/go.mod && cd $project_name/cli/generator  && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator && go build && export GO111MODULE="off" && go get ./. && export GO111MODULE="auto"
+)" > $project_name/go.mod && cd $project_name/cli/generator  && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator && go build && export GO111MODULE="off" && go get ./. && export GO111MODULE="auto" && go mod tidy
 
-````
-
-
-````
- cd go/src/$project_name/cli/generator
- go get -u github.com/ar-mokhtari/orginfo-generator
- go build
 ````
 
 <h5>pattern #1</h5>
@@ -133,36 +126,36 @@ input from command and flag one by one:
 
 ````
  cd go/src/$project_name/cli/generator/bin
-./generator sub-command -domain_name="DOMAIN NAME" -fields="field1-string-field1_1,field2-uint-field1_2,..."
+./generator sub-command -domain_name="DOMAIN NAME" -fields="field1-string-field1_1,field2-uint-field1_2,..." && go mod tidy
 ````
 
 run this for add **a** new domain:
 
 ````
-./generator new -domain_name="DOMAIN_NAME" -fields="codeType-uint-code_type,code-uint-code"
+./generator new -domain_name="DOMAIN_NAME" -fields="codeType-uint-code_type,code-uint-code" && go mod tidy
 ````
 
 Also, to remove a domain run this:
 
 ````
-./generator delete -domain_name="DOMAIN_NAME"
+./generator delete -domain_name="DOMAIN_NAME" && go mod tidy
 ````
 
 <h5>pattern #2</h5>
 <h6>import domain(s) from json type file ... </h6>
 
 ````
-./generator new -from_file
+./generator new -from_file && go mod tidy
 ````
 
 <h6>remove domain(s) from json type file ... </h6>
 
 ````
-./generator delete -from_file
+./generator delete -from_file && go mod tidy
 ````
 
 <h6>the file name must be: `input.json`. in this address: `/config/cli/generator/` </h6>
-<h6>you can find default of file in this address: [sample structure](cli/generator/input_struct.json)</h6>
+<h6>you can find default of file in this address: [sample structure](input_struct.json)</h6>
 
 ```json
 [
