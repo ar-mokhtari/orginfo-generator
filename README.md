@@ -61,9 +61,9 @@ go get github.com/go-ozzo/ozzo-validation
 to create new domain with CRUD operation and other prerequisite:
 
 ````
-peoject_name="project_name"
-cd ~/go/src &&
-mkdir -p $project_name/cli/generator &&
+export GO111MODULE="on" && cd ~/go/src &&
+project_name="new_project" &&
+mkdir -p -m777 $project_name/cli/generator &&
 echo "package main
 
 import \"github.com/ar-mokhtari/orginfo-generator\"
@@ -76,8 +76,8 @@ func main() {
 echo "package main
 
 import (
-	"$project_name/orginfo/adapter/storage"
-	"$project_name/orginfo/delivery/http"
+	\"$project_name/adapter/storage\"
+	\"$project_name/delivery/http\"
 )
 
 func init() {
@@ -89,8 +89,7 @@ func init() {
 
 func main() {
 
-}" > project_name/main.go && cd project_name &&
-
+}" > $project_name/main.go &&
 echo "module $project_name
 
 go 1.19
@@ -118,24 +117,22 @@ require (
 	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
 	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
 	golang.org/x/text v0.3.7 // indirect
-)
-" > project_name/go.mod
-&& go mod init && go mod tidy 
+)" > $project_name/go.mod && cd $project_name/cli/generator && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator  && go build 
 
 ````
 
 
 ````
- cd go/src/project_name/cli/generator
+ cd go/src/$project_name/cli/generator
  go get -u github.com/ar-mokhtari/orginfo-generator
- go build -o bin
+ go build
 ````
 
 <h5>pattern #1</h5>
 input from command and flag one by one:
 
 ````
- cd go/src/project_name/cli/generator/bin
+ cd go/src/$project_name/cli/generator/bin
 ./generator sub-command -domain_name="DOMAIN NAME" -fields="field1-string-field1_1,field2-uint-field1_2,..."
 ````
 
