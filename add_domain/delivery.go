@@ -27,7 +27,7 @@ func DomainDeliveryGenerator(domain entity.Domain) (err error) {
 		if httpInitCreateErr != nil {
 			return httpInitCreateErr
 		}
-		fmt.Fprintf(httpInit, "%s", "package http\n\nimport (\n\t\"github.com/ar-mokhtari/orginfo/delivery/http/V1\"\n\t\"github.com/labstack/echo/v4\"\n)\n\nfunc Init() {\n\t//initialise new Echo (web framework)\n\te := echo.New()\n\t//handle incoming requests:\n\tV1.Init(e)\n\t//serve with port\n\te.Logger.Fatal(e.Start(\":1315\"))\n}\n")
+		fmt.Fprintf(httpInit, "%s", "package http\n\nimport (\n\t\"github.com/ar-mokhtari/orginfo-generator/delivery/http/V1\"\n\t\"github.com/labstack/echo/v4\"\n)\n\nfunc Init() {\n\t//initialise new Echo (web framework)\n\te := echo.New()\n\t//handle incoming requests:\n\tV1.Init(e)\n\t//serve with port\n\te.Logger.Fatal(e.Start(\":1315\"))\n}\n")
 		defer httpInit.Close()
 	}
 	//---------------------------
