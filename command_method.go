@@ -47,7 +47,7 @@ func (nc *newCommand) Run() (err error) {
 				splitField := strings.Split(field, "-")
 				sliceCount := len(splitField)
 				if sliceCount != 3 {
-					return fmt.Errorf("fields have to content 3 parts: name-type-jsonKey, your input have %d", sliceCount)
+					return fmt.Errorf("fields have to content 3 parts: name-type-jsonKey, your input have %d, insert data is: %s", sliceCount, field)
 				}
 				resFields, prepareFieldErr := preparename.PrepareFieldsName(splitField[0], splitField[1], splitField[2])
 				if prepareFieldErr != nil {
