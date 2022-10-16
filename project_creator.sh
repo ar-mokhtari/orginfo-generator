@@ -81,6 +81,7 @@ export GO111MODULE="auto";
 go mod tidy;
 read -p "Do you want to create a new domain too? [y,n]" doit
 case $doit in  y|Y|yes|YES) cd ~/go/src/$project_name/cli/generator;
+IFS='';
 echo "insert domain name";
 read domain_name;
 echo "insert fields flag - read documents-readme.rm";
