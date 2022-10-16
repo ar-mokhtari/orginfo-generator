@@ -37,8 +37,16 @@ orgInfo-generator
 <a href="https://t.me/ar_mokhtari" rel="nofollow"><img alt="Telegram" title="Alireza Mokhtari G Telegram" src="https://camo.githubusercontent.com/cf4ed981404024c1adfc79d5575c4edf1836c4fe36b24b03383ece888cef7e29/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f54656c656772616d2d3243413545303f7374796c653d666f722d7468652d6261646765266c6f676f3d74656c656772616d266c6f676f436f6c6f723d7768697465" data-canonical-src="https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" style="max-width: 100%;"></a>
 <a href="https://www.linkedin.com/in/alireza-mokhtari-garakani-b4288024/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" style="max-width: 100%;"></a>
 <a href="https://discord.gg/F2YVf8Bu4R"><img src="![Discord](https://img.shields.io/badge/%3CServer%3E-%237289DA.svg?style=for-the-badge&logo=discord&logoColor=white" style="max-width: 100%;"></a>
-
 ---
+
+<h3> Quick Construction (Ubuntu 22.04.1 LTS) </h3>
+<hr>
+
+1. install go from official website https://go.dev/
+2. set $GOROOT:/usr/local/go/bin & $GOPATH/src: ~/go/src
+3. install Docker Desktop (https://docs.docker.com/desktop/install/linux-install/) and run `docker compose up -d`
+4. run [project_creator](project_creator.sh)
+
 
 <h3> Development map </h3>
 <hr>
@@ -55,6 +63,7 @@ go get -u gorm.io/driver/sqlite
 go get github.com/go-ozzo/ozzo-validation
 
 ````
+<h6>you can find default of file in this address: [sample structure](input_struct.json)</h6>
 
 <h3>Domain generator</h3>
 <hr>
