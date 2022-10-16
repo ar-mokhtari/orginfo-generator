@@ -94,5 +94,6 @@ go get ./. ;;
 esac;
 cd ~/go/src/$project_name;
 find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/| - \1/";
+go run main.go;
 echo "-------end (will close in 45sec) -------\n";
 sleep 45;'
