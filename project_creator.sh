@@ -1,8 +1,9 @@
-#!/bin/bash  
-      
-# Read the user input   
+#!/bin/bash
+
+# Read the user input
 #gnome-terminal --tab --active --title="..::|| orginfo-generator ||::.." -- sh -c  "./12.sh"
 #gnome-terminal -- bash -c "./12.sh; exec bash"
+# shellcheck disable=SC2016
 gnome-terminal --tab --active --title="..::|| orginfo-generator ||::.." -- sh -c '
 echo please insert project name;
 read project_name;
@@ -84,15 +85,13 @@ echo "insert domain name";
 read domain_name;
 echo "insert fields flag - read documents-readme.rm";
 read fields_flag;
-flags=" new -domain_name=\"$domain_name\" -fields=\"$fields_flag\"";
-echo $flags;
-./generator $flags;
+./generator new -domain_name=$domain_name -fields=$fields_flag;
 echo "--------./generator new -domain_name=$domain_name -fields=$fields_flag---------\n";
 go mod tidy;
 cd ../..;
-go get ./. ;; 
+go get ./. ;;
 esac;
 cd ~/go/src/$project_name;
 find . -type d | sed -e "s/[^-][^\/]*\//  |/g" -e "s/|\([^ ]\)/| - \1/";
-echo "-------end-------\n";
+echo "-------end (will close in 45sec) -------\n";
 sleep 45;'

@@ -19,10 +19,13 @@ func New() {
 	env.MainPath = strings.Join(mainPathSlice, "/") + "/"
 	//-------find project path---------
 
+	//FOR DEBUG
+	fmt.Println(os.Args)
+
 	//prepare command(s) with flag(s)
 	flagErr := rootCommand(os.Args[1:])
 	if flagErr != nil {
-		println(flagErr.Error())
+		fmt.Println(flagErr.Error())
 		os.Exit(1)
 	}
 }
