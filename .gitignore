@@ -17,3 +17,10 @@
 bin
 
 input.json
+
+
+# dotenv environment variables file
+.env
+
+# Log file
+*.log
