@@ -69,6 +69,10 @@ go get github.com/go-ozzo/ozzo-validation
 <hr>
 to create new domain with CRUD operation and other prerequisite:
 
+```bash
+go get -u github.com/ar-mokhtari/orginfo-generator
+```
+
 ````
 cd ~/go/src &&
 project_name="myproject" &&
