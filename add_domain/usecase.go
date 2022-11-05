@@ -68,7 +68,7 @@ func DomainUsecaseGenerator(domain entity.Domain) (err error) {
 	if fileProtocolErr != nil {
 		return fileProtocolErr
 	}
-	fileValidator, fileValidatorErr := os.Create(env.MainPath + env.Usecase + "/validation/" + domain.SnakeName + "/temp_validator.go")
+	fileValidator, fileValidatorErr := os.Create(env.MainPath + env.Usecase + "/validation/" + domain.SnakeName + "/" + domain.SnakeName + "_validator.go")
 	if fileValidatorErr != nil {
 		return fileValidatorErr
 	}
