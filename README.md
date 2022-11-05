@@ -69,6 +69,10 @@ go get github.com/go-ozzo/ozzo-validation
 <hr>
 to create new domain with CRUD operation and other prerequisite:
 
+```bash
+go get -u github.com/ar-mokhtari/orginfo-generator
+```
+
 ````
 cd ~/go/src &&
 project_name="myproject" &&
@@ -198,6 +202,15 @@ To use and call from API platform like "Postman":
 <a href="" 
 target="_blank"><img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white" alt="git" /></a>&nbsp;
 </p>
+
+for continue on existing repo:
+````
+cd existing_repo
+git remote add origin `git address`
+git branch -M main
+git push -uf origin main
+
+````
 
 for clone
 

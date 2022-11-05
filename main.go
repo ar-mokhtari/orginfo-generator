@@ -2,9 +2,10 @@ package generator
 
 import (
 	"fmt"
-	"github.com/ar-mokhtari/orginfo-generator/env"
 	"os"
 	"strings"
+
+	"github.com/ar-mokhtari/orginfo-generator/env"
 )
 
 func New() {
