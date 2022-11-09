@@ -9,7 +9,7 @@ import (
 
 type {{.UpperName}} struct {
 	gorm.Model
-    {{.UpperName}}Name   string     `gorm:"unique; not null" json:"{{.SnakeName}}_name"`
+    {{.UpperName}}Name   string     `json:"{{.SnakeName}}_name"`
     {{range .Fields}}
     {{.Name}} {{.Type}} `json:"{{.JsonName}}"`{{end}}
     //to don't insert value in "updated_at" at "insert mode" :
