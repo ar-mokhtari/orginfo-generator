@@ -11,16 +11,7 @@ import (
 )
 
 func init() {
-	repo, repoErr := ioutil.ReadFile(env.MainPath + "go.mod")
-	if repoErr != nil {
-		fmt.Println(repoErr)
-		fmt.Println(env.MainPath + "go.mod")
-	}
-	repoContent := string(repo)
-	lines := strings.Split(repoContent, "\n")
-	firstLine := lines[0]
-	finalRepo := bytes.Replace([]byte(firstLine), []byte("module "), []byte(""), -1)
-	env.MainRepositoryPath = string(finalRepo)
+
 }
 
 func New() {
@@ -31,6 +22,16 @@ func New() {
 	}
 	spilitedPwd := strings.Split(pwd, "/")
 	mainPathSlice := spilitedPwd[:6]
+	repo, repoErr := ioutil.ReadFile(strings.Join(spilitedPwd[5:6], "/") + "go.mod")
+	if repoErr != nil {
+		fmt.Println(repoErr)
+		fmt.Println(strings.Join(spilitedPwd[5:6], "/") + "go.mod")
+	}
+	repoContent := string(repo)
+	lines := strings.Split(repoContent, "\n")
+	firstLine := lines[0]
+	finalRepo := bytes.Replace([]byte(firstLine), []byte("module "), []byte(""), -1)
+	env.MainRepositoryPath = string(finalRepo)
 	if env.MainRepositoryPath == "" {
 		env.MainRepositoryPath = strings.Join(spilitedPwd[5:6], "/")
 	}
