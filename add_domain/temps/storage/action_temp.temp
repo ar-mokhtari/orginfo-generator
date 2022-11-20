@@ -31,9 +31,9 @@ func (d *DBMS) New{{.UpperName}}(ctx context.Context, input{{.UpperName}} entity
 func (d *DBMS) Edit{{.UpperName}}(ctx context.Context, new{{.UpperName}} entity{{.AllLowName}}.{{.UpperName}}) (entity{{.AllLowName}}.{{.UpperName}}, error) {
 	var {{.LowerName}} storage.{{.UpperName}}
 	{{.LowerName}} = storage.MapEntityTo{{.UpperName}}Store(new{{.UpperName}})
-	err := d.gorm.WithContext(ctx).First(&{{.LowerName}}).Save(&{{.LowerName}})
+	err := d.gorm.WithContext(ctx).Where("id = ?", new{{.UpperName}}.ID).Updates(&{{.LowerName}}).Error
 	if err != nil {
-		return entity{{.AllLowName}}.{{.UpperName}}{}, err.Error
+		return entity{{.AllLowName}}.{{.UpperName}}{}, err
 	}
 	return storage.Map{{.UpperName}}StoreToEntity({{.LowerName}}), nil
 }

@@ -9,9 +9,9 @@ import (
 
 type {{.UpperName}} struct {
 	gorm.Model
-    {{.UpperName}}Name   string     `json:"{{.SnakeName}}_name"`
+    {{.UpperName}}Name   string     `json:"{{.SnakeName}}_name,omitempty"`
     {{range .Fields}}
-    {{.Name}} {{.Type}} `json:"{{.JsonName}}"`{{end}}
+    {{.Name}} {{.Type}} `json:"{{.JsonName}},omitempty"`{{end}}
     //to don't insert value in "updated_at" at "insert mode" :
     //see more: https://gorm.io/docs/update.html
     UpdatedAt  *time.Time `json:"updated_at" gorm:"<-:update"`
