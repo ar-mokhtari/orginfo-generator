@@ -14,6 +14,7 @@ func init() {
 	repo, repoErr := ioutil.ReadFile(env.MainPath + "go.mod")
 	if repoErr != nil {
 		fmt.Println(repoErr)
+		fmt.Println(env.MainPath + "go.mod")
 	}
 	repoContent := string(repo)
 	lines := strings.Split(repoContent, "\n")
