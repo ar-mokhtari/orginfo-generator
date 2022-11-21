@@ -18,6 +18,7 @@ type {{.UpperName}} struct {
 
 func Map{{.UpperName}}StoreToEntity({{.LowerName}} {{.UpperName}}) entity{{.AllLowName}}.{{.UpperName}} {
 	returnModel := entity{{.AllLowName}}.{{.UpperName}}{
+	    ID:                     &{{.LowerName}}.ID,
         {{.UpperName}}Name:     &{{.LowerName}}.{{.UpperName}}Name,{{range .Fields}}
         {{.Name}}:              &{{$.LowerName}}.{{.Name}}, {{end}}
 	}
