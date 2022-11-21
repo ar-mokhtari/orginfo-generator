@@ -7,9 +7,9 @@ import (
 type (
 	//get
 	Get{{.UpperName}}Request struct {
-		ID{{"\t"}}uint{{"\t"}}`json:"id"`
-        {{.UpperName}}Name{{"\t"}}string{{"\t"}}`json:"{{.LowerName}}_name"` {{range .Fields}}
-        {{.Name}} {{.Type}}{{"\t"}}`json:"{{.JsonName}}"`{{end}}
+		ID{{printf "%q"}}uint{{printf "%q"}}`json:"id"`
+        {{.UpperName}}Name{{printf "%q"}}string{{printf "%q"}}`json:"{{.LowerName}}_name"` {{range .Fields}}
+        {{.Name}} {{.Type}}{{printf "%q"}}`json:"{{.JsonName}}"`{{end}}
 	}
 	Get{{.UpperName}}Response struct {
 		{{.UpperName}}s []entity{{.AllLowName}}.{{.UpperName}}
@@ -21,8 +21,8 @@ type (
 	Delete{{.UpperName}}Response struct{}
 	//new
 	New{{.UpperName}}Request struct {
-        {{.UpperName}}Name{{"\t"}}string{{"\t"}}`json:"{{.LowerName}}_name,omitempty"` {{range .Fields}}
-        {{.Name}}{{"\t"}}{{.Type}}{{"\t"}}`json:"{{.JsonName}},omitempty"`{{end}}
+        {{.UpperName}}Name{{printf "%q"}}string{{printf "%q"}}`json:"{{.LowerName}}_name,omitempty"` {{range .Fields}}
+        {{.Name}}{{printf "%q"}}{{.Type}}{{printf "%q"}}`json:"{{.JsonName}},omitempty"`{{end}}
 	}
 	New{{.UpperName}}Response struct{}
 	//find
@@ -34,9 +34,9 @@ type (
 	}
     //edit
     Edit{{.UpperName}}Request struct {
-        ID{{"\t"}}uint{{"\t"}}`json:"id"`
-        {{.UpperName}}Name{{"\t"}}string{{"\t"}}`json:"{{.LowerName}}_name,omitempty"` {{range .Fields}}
-        {{.Name}}{{"\t"}}{{.Type}}{{"\t"}}`json:"{{.JsonName}},omitempty"`{{end}}
+        ID{{printf "%q"}}uint{{printf "%q"}}`json:"id"`
+        {{.UpperName}}Name{{printf "%q"}}string{{printf "%q"}}`json:"{{.LowerName}}_name,omitempty"` {{range .Fields}}
+        {{.Name}}{{printf "%q"}}{{.Type}}{{printf "%q"}}`json:"{{.JsonName}},omitempty"`{{end}}
     }
     Edit{{.UpperName}}Response struct {
         Edited{{.UpperName}} entity{{.AllLowName}}.{{.UpperName}}

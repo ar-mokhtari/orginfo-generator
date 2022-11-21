@@ -8,8 +8,8 @@ import (
 
 type (
     {{.UpperName}} struct {
-        ID{{"\t"}}*uint
-        {{.UpperName}}Name{{"\t"}}*string {{range .Fields}}
-        {{.Name}}{{"\t"}}*{{.Type}} {{end}}
+        ID{{printf "%q"}}*uint
+        {{.UpperName}}Name{{printf "%q"}}*string {{range .Fields}}
+        {{.Name}}{{printf "%q"}}*{{.Type}} {{end}}
     }
 )
