@@ -18,8 +18,8 @@ type {{.UpperName}} struct {
 
 func Map{{.UpperName}}StoreToEntity({{.LowerName}} {{.UpperName}}) entity{{.AllLowName}}.{{.UpperName}} {
 	returnModel := entity{{.AllLowName}}.{{.UpperName}}{
-        {{.UpperName}}Name:     &input.{{.UpperName}}Name,{{range .Fields}}
-        {{.Name}}:              &input.{{.Name}}, {{end}}
+        {{.UpperName}}Name:     &{{.LowerName}}.{{.UpperName}}Name,{{range .Fields}}
+        {{.Name}}:              &{{.LowerName}}.{{.Name}}, {{end}}
 	}
 	return returnModel
 }
