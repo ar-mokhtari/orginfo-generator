@@ -22,10 +22,10 @@ func New() {
 	}
 	spilitedPwd := strings.Split(pwd, "/")
 	mainPathSlice := spilitedPwd[:6]
-	repo, repoErr := ioutil.ReadFile(strings.Join(spilitedPwd[5:6], "/") + "go.mod")
+	repo, repoErr := ioutil.ReadFile(strings.Join(spilitedPwd[:6], "/") + "/go.mod")
 	if repoErr != nil {
 		fmt.Println(repoErr)
-		fmt.Println(strings.Join(spilitedPwd[5:6], "/") + "go.mod")
+		fmt.Println(strings.Join(spilitedPwd[:6], "/") + "go.mod")
 	}
 	repoContent := string(repo)
 	lines := strings.Split(repoContent, "\n")

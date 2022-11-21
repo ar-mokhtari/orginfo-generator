@@ -9,9 +9,9 @@ import (
 
 type {{.UpperName}} struct {
 	gorm.Model
-    {{.UpperName}}Name   string     `json:"{{.SnakeName}}_name,omitempty"`
+    {{.UpperName}}Name\t string\t`json:"{{.SnakeName}}_name,omitempty"`
     {{range .Fields}}
-    {{.Name}} {{.Type}} `json:"{{.JsonName}},omitempty"`{{end}}
+    {{.Name}}\t{{.Type}}\t`json:"{{.JsonName}},omitempty"`{{end}}
     //to don't insert value in "updated_at" at "insert mode" :
     //see more: https://gorm.io/docs/update.html
     UpdatedAt  *time.Time `json:"updated_at" gorm:"<-:update"`
@@ -19,17 +19,17 @@ type {{.UpperName}} struct {
 
 func Map{{.UpperName}}StoreToEntity({{.LowerName}} {{.UpperName}}) entity{{.AllLowName}}.{{.UpperName}} {
 	return entity{{.AllLowName}}.{{.UpperName}}{
-		ID:         {{.LowerName}}.ID,
-        {{.UpperName}}Name: {{.LowerName}}.{{.UpperName}}Name,
+		ID:\t{{.LowerName}}.ID,
+        {{.UpperName}}Name:\t{{.LowerName}}.{{.UpperName}}Name,
         {{range .Fields}}
-        {{.Name}}:  {{$.LowerName}}.{{.Name}}, {{end}}
+        {{.Name}}:\t{{$.LowerName}}.{{.Name}}, {{end}}
 	}
 }
 
 func MapEntityTo{{.UpperName}}Store(input entity{{.AllLowName}}.{{.UpperName}}) {{.UpperName}} {
 	return {{.UpperName}}{
-	    {{.UpperName}}Name: input.{{.UpperName}}Name,
+	    {{.UpperName}}Name:\t input.{{.UpperName}}Name,
         {{range .Fields}}
-        {{.Name}}:  input.{{.Name}}, {{end}}
+        {{.Name}}:\t input.{{.Name}}, {{end}}
 	}
 }
