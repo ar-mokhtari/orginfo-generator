@@ -17,10 +17,11 @@ type {{.UpperName}} struct {
 }
 
 func Map{{.UpperName}}StoreToEntity({{.LowerName}} {{.UpperName}}) entity{{.AllLowName}}.{{.UpperName}} {
-	return entity{{.AllLowName}}.{{.UpperName}}{
-		ID:                     &{{.LowerName}}.ID,{{range .Fields}}
-        {{.Name}}:              &{{$.LowerName}}.{{.Name}}, {{end}}
+	returnModel := entity{{.AllLowName}}.{{.UpperName}}{
+        {{.UpperName}}Name:     &input.{{.UpperName}}Name,{{range .Fields}}
+        {{.Name}}:              &input.{{.Name}}, {{end}}
 	}
+	return returnModel
 }
 
 func MapEntityTo{{.UpperName}}Store(input entity{{.AllLowName}}.{{.UpperName}}) {{.UpperName}} {
