@@ -18,9 +18,8 @@ func (uc Usecase) New{{.UpperName}}(ctx context.Context, req dto.New{{.UpperName
 	//Sanitize DTO request
 
 	var entityModel entity{{.AllLowName}}.{{.UpperName}}
-    entityModel.{{.UpperName}}Name = req.{{.UpperName}}Name
-    {{range .Fields}}
-    entityModel.{{.Name}} = req.{{.Name}}{{end}}
+    entityModel.{{.UpperName}}Name = &req.{{.UpperName}}Name{{range .Fields}}
+    entityModel.{{.Name}} = &req.{{.Name}}{{end}}
 
 	//Try to insert DTO request to storage repository
 	err := storage.DB.New{{.UpperName}}(ctx, entityModel)

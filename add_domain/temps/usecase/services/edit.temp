@@ -19,10 +19,9 @@ func (uc Usecase) Edit{{.UpperName}}(ctx context.Context, input{{.UpperName}} dt
 
 	//prepare an entity model
 	{{.LowerName}} := entity{{.AllLowName}}.{{.UpperName}}{
-		ID:         input{{.UpperName}}.ID,
-		{{.UpperName}}Name:   input{{.UpperName}}.{{.UpperName}}Name,
-        {{range .Fields}}
-        {{.Name}}:  input{{$.UpperName}}.{{.Name}}, {{end}}
+		ID:     &input{{.UpperName}}.ID,
+		{{.UpperName}}Name:     &input{{.UpperName}}.{{.UpperName}}Name,{{range .Fields}}
+        {{.Name}}:      &input{{$.UpperName}}.{{.Name}}, {{end}}
 	}
 	//try to update storage
 	edited{{.UpperName}}, editErr := uc.storage.Edit{{.UpperName}}(ctx, {{.LowerName}})
