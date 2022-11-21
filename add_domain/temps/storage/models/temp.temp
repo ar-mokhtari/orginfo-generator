@@ -19,7 +19,7 @@ type {{.UpperName}} struct {
 func Map{{.UpperName}}StoreToEntity({{.LowerName}} {{.UpperName}}) entity{{.AllLowName}}.{{.UpperName}} {
 	returnModel := entity{{.AllLowName}}.{{.UpperName}}{
         {{.UpperName}}Name:     &{{.LowerName}}.{{.UpperName}}Name,{{range .Fields}}
-        {{.Name}}:              &{{.LowerName}}.{{.Name}}, {{end}}
+        {{.Name}}:              &{{$.LowerName}}.{{.Name}}, {{end}}
 	}
 	return returnModel
 }
