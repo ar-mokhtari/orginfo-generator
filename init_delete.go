@@ -10,5 +10,7 @@ func deleteInit(inputDomain entity.Domain) {
 	err := deletedomain.DeleteDomain(inputDomain)
 	if err != nil {
 		fmt.Println(err)
+	} else {
+		fmt.Printf("%s Domain deleted successfully \n", inputDomain.SnakeName)
 	}
 }
