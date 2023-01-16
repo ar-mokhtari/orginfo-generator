@@ -14,7 +14,7 @@ func (uc Usecase) Delete{{.UpperName}}(ctx context.Context, req dto.Delete{{.Upp
 		return dto.Delete{{.UpperName}}Response{}, pErr
 	}
 	//try to delete from storage
-	err := uc.storage.Delete{{.UpperName}}(ctx, req.ID)
+	err := uc.storage.Delete{{.UpperName}}(ctx, req.IDs)
 	if err != nil {
 		return dto.Delete{{.UpperName}}Response{}, err
 	}

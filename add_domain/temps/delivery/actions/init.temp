@@ -5,7 +5,7 @@ import "github.com/labstack/echo/v4"
 func Routs(e *echo.Echo) {
 	//initialise {{.LowerName}} details routes
 	e.GET("/{{.AllLowName}}s", Get{{.UpperName}}s())
-	e.DELETE("/{{.AllLowName}}/:id", Delete{{.UpperName}}())
+	e.DELETE("/{{.AllLowName}}", Delete{{.UpperName}}())
 	e.GET("/{{.AllLowName}}/:id", Find{{.UpperName}}())
 	e.POST("/{{.AllLowName}}", New{{.UpperName}}())
 	e.PATCH("/{{.AllLowName}}", Edit{{.UpperName}}())

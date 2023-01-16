@@ -16,7 +16,7 @@ type (
 	}
 	//delete
 	Delete{{.UpperName}}Request struct {
-		ID uint `json:"id"`
+        IDs []uint `json:"ids"`
 	}
 	Delete{{.UpperName}}Response struct{}
 	//new

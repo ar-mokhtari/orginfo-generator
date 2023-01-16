@@ -48,9 +48,9 @@ func (d *DBMS) Find{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) (e
 func (d *DBMS) Find{{.UpperName}}By{{.UpperName}}Name(ctx context.Context, {{.UpperName}}Name string) (entity{{.AllLowName}}.{{.UpperName}}, error) {
 	return entity{{.AllLowName}}.{{.UpperName}}{}, nil
 }
-func (d *DBMS) Delete{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) error {
+func (d *DBMS) Delete{{.UpperName}}(ctx context.Context, {{.UpperName}}IDs []uint) error {
 	// DELETE FROM {{.LowerName}}s WHERE id = {{.UpperName}}ID;
-	err := d.gorm.Delete(&storage.{{.UpperName}}{}, {{.UpperName}}ID).Error
+	err := d.gorm.Delete(&storage.{{.UpperName}}{}, {{.UpperName}}IDs).Error
 	if err != nil {
 		return err
 	}

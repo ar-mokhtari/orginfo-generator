@@ -25,10 +25,7 @@ func is{{.UpperName}}Exist(ctx context.Context, storage ValidatorStorage) valida
 
 func Delete{{.UpperName}}Validate() ValidatorDelete{{.UpperName}}Protocol {
 	return func(ctx context.Context, req dto.Delete{{.UpperName}}Request) error {
-		return validation.ValidateStruct(&req,
-			validation.Field(&req.ID, validation.Required),
-			validation.Field(&req.ID, validation.By(is{{.UpperName}}Exist(ctx, &storage.DB))),
-		)
+		return nil
 	}
 }
 

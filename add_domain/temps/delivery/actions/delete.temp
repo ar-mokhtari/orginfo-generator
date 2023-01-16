@@ -11,12 +11,10 @@ import (
 func Delete{{.UpperName}}() echo.HandlerFunc {
 	return func(c echo.Context) error {
 		var req dto.Delete{{.UpperName}}Request
-		idStr := c.Param("id")
-		{{.LowerName}}ID, err := strconv.Atoi(idStr)
-		if err != nil {
-			return echo.NewHTTPError(http.StatusBadRequest, err.Error())
+		bErr := c.Bind(&req)
+		if bErr != nil {
+			return c.JSON(http.StatusInternalServerError, bErr.Error())
 		}
-		req.ID = uint({{.LowerName}}ID)
 		res, err := usecase{{.UpperName}}.InitUsecase().Delete{{.UpperName}}(c.Request().Context(), req)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err)
