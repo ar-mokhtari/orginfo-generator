@@ -44,25 +44,9 @@ orgInfo-generator
 
 1. install go from official website https://go.dev/
 2. set $GOROOT:/usr/local/go/bin & $GOPATH/src: ~/go/src
-3. install Docker Desktop (https://docs.docker.com/desktop/install/linux-install/) and run `docker compose up -d`
-4. run [project_creator](project_creator.sh)
+3. run [project_creator](project_creator.sh)
 
 
-<h3> Development map </h3>
-<hr>
-
-````
-mkdir orginfo && cd orginfo
-go mod init orginfo
-------------------------------------------echo
-go get github.com/labstack/echo/v4
-------------------------------------------gorm
-go get -u gorm.io/gorm
-go get -u gorm.io/driver/sqlite
-------------------------------------------ozzo-validation
-go get github.com/go-ozzo/ozzo-validation
-
-````
 <h6>you can find default of file in this address: [sample structure](input_struct.json)</h6>
 
 <h3>Domain generator</h3>
@@ -86,51 +70,7 @@ func main() {
 }
 
 " > $project_name/cli/generator/main.go &&
-echo "package main
-
-import (
-	\"$project_name/adapter/storage\"
-	\"$project_name/delivery/http\"
-)
-
-func init() {
-	//initialise D.B.M.S. (Database management system)
-	storage.Init()
-	//initialise new Echo (web framework)
-	http.Init()
-}
-
-func main() {
-
-}" > $project_name/main.go &&
-echo "module $project_name
-
-go 1.19
-
-require (
-	github.com/ar-mokhtari/orginfo-generator v0.0.0-20221011095741-3289a676bde8
-	github.com/dlclark/regexp2 v1.7.0
-	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
-	github.com/labstack/echo/v4 v4.9.0
-	golang.org/x/crypto v0.0.0-20221010152910-d6f0a8c073c2
-	gorm.io/driver/mysql v1.3.6
-	gorm.io/gorm v1.23.8
-)
-
-require (
-	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
-	github.com/jinzhu/inflection v1.0.0 // indirect
-	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/labstack/gommon v0.3.1 // indirect
-	github.com/mattn/go-colorable v0.1.11 // indirect
-	github.com/mattn/go-isatty v0.0.14 // indirect
-	github.com/valyala/bytebufferpool v1.0.0 // indirect
-	github.com/valyala/fasttemplate v1.2.1 // indirect
-	golang.org/x/net v0.0.0-20211112202133-69e39bad7dc2 // indirect
-	golang.org/x/sys v0.0.0-20211103235746-7861aae1554b // indirect
-	golang.org/x/text v0.3.7 // indirect
-)" > $project_name/go.mod && cd $project_name/cli/generator  && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator && go build && export GO111MODULE="off" && go get ./. && export GO111MODULE="auto" && go mod tidy
+  > $project_name/go.mod && cd $project_name/cli/generator  && go mod tidy &&  go get -u github.com/ar-mokhtari/orginfo-generator && go build && export GO111MODULE="off" && go get ./. && export GO111MODULE="auto" && go mod tidy
 
 ````
 
