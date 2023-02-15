@@ -25,17 +25,14 @@ func is{{.UpperName}}Exist(ctx context.Context, storage ValidatorStorage) valida
 
 func Delete{{.UpperName}}Validate() ValidatorDelete{{.UpperName}}Protocol {
 	return func(ctx context.Context, req dto.Delete{{.UpperName}}Request) error {
-		return validation.ValidateStruct(&req,
-			validation.Field(&req.ID, validation.Required),
-			validation.Field(&req.ID, validation.By(is{{.UpperName}}Exist(ctx, &storage.DB))),
-		)
+		return nil
 	}
 }
 
 func New{{.UpperName}}Validate() ValidatorNew{{.UpperName}}Protocol {
 	return func(ctx context.Context, req dto.New{{.UpperName}}Request) error {
 		return validation.ValidateStruct(&req,
-			validation.Field(&req.{{.UpperName}}Name, is.Alphanumeric, validation.Length(3, 15)),
+			validation.Field(&req.{{.UpperName}}Name, validation.Length(3, 15)),
 		)
 	}
 }
@@ -43,7 +40,7 @@ func Edit{{.UpperName}}Validate() ValidatorEdit{{.UpperName}}Protocol {
 	return func(ctx context.Context, req dto.Edit{{.UpperName}}Request) error {
 		return validation.ValidateStruct(&req,
             validation.Field(&req.ID, validation.Required),
-			validation.Field(&req.{{.UpperName}}Name, is.Alphanumeric, validation.Length(3, 15)),
+			validation.Field(&req.{{.UpperName}}Name, validation.Length(3, 15)),
 		)
 	}
 }
