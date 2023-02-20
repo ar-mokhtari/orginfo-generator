@@ -1,4 +1,4 @@
-package delivery{{.AllLowName}}
+package usecase{{.AllLowName}}
 
 import (
 	"context"
