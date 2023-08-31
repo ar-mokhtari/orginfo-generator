@@ -2,6 +2,7 @@ package delivery{{.AllLowName}}
 
 import (
 	dto "{{.ProjectName}}/dto/{{.SnakeName}}"
+	usecase{{.UpperName}} "{{.ProjectName}}/pkg/convertor"
 	usecase{{.UpperName}} "{{.ProjectName}}/usecase/{{.SnakeName}}"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -16,7 +17,8 @@ func Edit{{.UpperName}}() echo.HandlerFunc {
 		}
 		res, err := usecase{{.UpperName}}.InitUsecase().Edit{{.UpperName}}(c.Request().Context(), new{{.UpperName}})
 		if err != nil {
-			return c.JSON(http.StatusInternalServerError, err)
+			tErr := convertor.TErr(err)
+			return c.JSON(http.StatusPaymentRequired, tErr.Error())
 		}
 		return c.JSON(http.StatusOK, res)
 	}

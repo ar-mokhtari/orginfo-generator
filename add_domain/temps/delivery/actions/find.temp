@@ -2,6 +2,7 @@ package delivery{{.AllLowName}}
 
 import (
 	dto "{{.ProjectName}}/dto/{{.SnakeName}}"
+	usecase{{.UpperName}} "{{.ProjectName}}/pkg/convertor"
 	usecase{{.UpperName}} "{{.ProjectName}}/usecase/{{.SnakeName}}"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -21,7 +22,8 @@ func Find{{.UpperName}}() echo.HandlerFunc {
 		//send data to usecase layer
 		res, err := usecase{{.UpperName}}.InitUsecase().Find{{.UpperName}}(c.Request().Context(), req)
 		if err != nil {
-			return c.JSON(http.StatusInternalServerError, err)
+			tErr := convertor.TErr(err)
+			return c.JSON(http.StatusPaymentRequired, tErr.Error())
 		}
 		return c.JSON(http.StatusOK, res)
 	}
