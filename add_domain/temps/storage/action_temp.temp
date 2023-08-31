@@ -10,7 +10,7 @@ import (
 
 func (d *DBMS) Get{{.UpperName}}s(ctx context.Context) ([]entity{{.AllLowName}}.{{.UpperName}}, error) {
 	var storeResponse []storage.{{.UpperName}}
-	if err := d.gorm.WithContext(ctx).Find(&storeResponse).Error; err != nil {
+	if err := d.db.WithContext(ctx).Find(&storeResponse).Error; err != nil {
 		return nil, err
 	}
 	{{.LowerName}}Entities := make([]entity{{.AllLowName}}.{{.UpperName}}, len(storeResponse))
@@ -22,7 +22,7 @@ func (d *DBMS) Get{{.UpperName}}s(ctx context.Context) ([]entity{{.AllLowName}}.
 func (d *DBMS) New{{.UpperName}}(ctx context.Context, input{{.UpperName}} entity{{.AllLowName}}.{{.UpperName}}) error {
 	var {{.LowerName}} storage.{{.UpperName}}
 	{{.LowerName}} = storage.MapEntityTo{{.UpperName}}Store(input{{.UpperName}})
-	err := d.gorm.WithContext(ctx).Create(&{{.LowerName}}).Error
+	err := d.db.WithContext(ctx).Create(&{{.LowerName}}).Error
 	if err != nil {
 		return err
 	}
@@ -31,7 +31,7 @@ func (d *DBMS) New{{.UpperName}}(ctx context.Context, input{{.UpperName}} entity
 func (d *DBMS) Edit{{.UpperName}}(ctx context.Context, new{{.UpperName}} entity{{.AllLowName}}.{{.UpperName}}) (entity{{.AllLowName}}.{{.UpperName}}, error) {
 	var {{.LowerName}} storage.{{.UpperName}}
 	{{.LowerName}} = storage.MapEntityTo{{.UpperName}}Store(new{{.UpperName}})
-	err := d.gorm.WithContext(ctx).Where("id = ?", new{{.UpperName}}.ID).Updates(&{{.LowerName}}).Error
+	err := d.db.WithContext(ctx).Where("id = ?", new{{.UpperName}}.ID).Updates(&{{.LowerName}}).Error
 	if err != nil {
 		return entity{{.AllLowName}}.{{.UpperName}}{}, err
 	}
@@ -39,7 +39,7 @@ func (d *DBMS) Edit{{.UpperName}}(ctx context.Context, new{{.UpperName}} entity{
 }
 func (d *DBMS) Find{{.UpperName}}(ctx context.Context, {{.UpperName}}ID uint) (entity{{.AllLowName}}.{{.UpperName}}, error) {
 	var {{.LowerName}} storage.{{.UpperName}}
-	err := d.gorm.WithContext(ctx).Find(&{{.LowerName}}, {{.UpperName}}ID).Error
+	err := d.db.WithContext(ctx).Find(&{{.LowerName}}, {{.UpperName}}ID).Error
 	if err != nil {
 		return entity{{.AllLowName}}.{{.UpperName}}{}, err
 	}
@@ -50,7 +50,7 @@ func (d *DBMS) Find{{.UpperName}}By{{.UpperName}}Name(ctx context.Context, {{.Up
 }
 func (d *DBMS) Delete{{.UpperName}}(ctx context.Context, {{.UpperName}}IDs []uint) error {
 	// DELETE FROM {{.LowerName}}s WHERE id = {{.UpperName}}ID;
-	err := d.gorm.Delete(&storage.{{.UpperName}}{}, {{.UpperName}}IDs).Error
+	err := d.db.Delete(&storage.{{.UpperName}}{}, {{.UpperName}}IDs).Error
 	if err != nil {
 		return err
 	}
@@ -59,7 +59,7 @@ func (d *DBMS) Delete{{.UpperName}}(ctx context.Context, {{.UpperName}}IDs []uin
 
 func (d *DBMS) {{.UpperName}}NameExist(ctx context.Context, input string) error {
 	var {{.LowerName}} entity{{.AllLowName}}.{{.UpperName}}
-	err := d.gorm.WithContext(ctx).Where("{{.LowerName}}Name LIKE ?", "%"+input+"%").Find(&{{.LowerName}}).Error
+	err := d.db.WithContext(ctx).Where("{{.LowerName}}Name LIKE ?", "%"+input+"%").Find(&{{.LowerName}}).Error
 	if err != nil {
 		return err
 	}
@@ -72,7 +72,7 @@ func (d *DBMS) {{.UpperName}}NameExist(ctx context.Context, input string) error 
 // this method is for validation dependencies which must respect
 func (d *DBMS) Is{{.UpperName}}Exist(ctx context.Context, {{.LowerName}}ID uint) (bool, error) {
 	// SELECT * FROM {{.LowerName}}s WHERE id = {{.LowerName}}ID;
-	err := d.gorm.WithContext(ctx).First(&storage.{{.UpperName}}{}, {{.LowerName}}ID).Error
+	err := d.db.WithContext(ctx).First(&storage.{{.UpperName}}{}, {{.LowerName}}ID).Error
 	if err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return false, nil
