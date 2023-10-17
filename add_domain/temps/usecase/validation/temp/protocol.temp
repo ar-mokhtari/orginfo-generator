@@ -1,4 +1,4 @@
-package usecasevvvv{{.AllLowName}}
+package usecase{{.AllLowName}}
 
 import (
 	"context"
