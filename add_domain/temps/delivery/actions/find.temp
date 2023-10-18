@@ -2,7 +2,7 @@ package delivery{{.AllLowName}}
 
 import (
 	dto "{{.ProjectName}}/dto/{{.SnakeName}}"
-	usecase{{.UpperName}} "{{.ProjectName}}/pkg/convertor"
+	 convertor "{{.ProjectName}}/pkg/convertor"
 	usecase{{.UpperName}} "{{.ProjectName}}/usecase/{{.SnakeName}}"
 	"github.com/labstack/echo/v4"
 	"net/http"
