@@ -17,13 +17,10 @@ orgInfo-generator
 
 
 <table cellpadding="0" cellspacing="0">
-<tr>
-    <td style="margin-top: -2rem" valign="button"><h4 style="color: deepskyblue;margin-bottom: -1.5rem">Powered by</h4></td>
-    <td rowspan="2"><img alt="cgapp logo" src="https://raw.githubusercontent.com/create-go-app/cli/master/.github/images/cgapp_logo%402x.png" width="100px"/><br/></td>
-  </tr>
-  <tr>
-    <td><img src="https://camo.githubusercontent.com/4724436344c2473558068577d7e9e6b597c2baabe75a499cd67e04a448e00d84/68747470733a2f2f7777772e766563746f726c6f676f2e7a6f6e652f6c6f676f732f676f6c616e672f676f6c616e672d617232312e737667" ></td>
-  </tr>
+    <tr>
+        <td style="margin-top: -1rem" valign="button"><h4 style="color: deepskyblue;margin-bottom: -1.5rem">Powered by</h4></td>
+        <td><img alt="cgapp logo" src="https://raw.githubusercontent.com/create-go-app/cli/master/.github/images/cgapp_logo%402x.png" width="100px"/><br/></td>
+    </tr>
 </table> 
 
 
